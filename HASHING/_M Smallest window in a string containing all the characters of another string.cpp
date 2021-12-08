@@ -40,7 +40,7 @@ class Solution
                 
                 //if count of current character in string s is equal to or less 
                 //than in string p, we increment the counter.
-                if(phash[s[i]]-'a'!=0&&shash[s[i]-'a']<=phash[s[i]-'a'])
+                if(phash[s[i]-'a']!=0&&shash[s[i]-'a']<=phash[s[i]-'a'])
                 {
                     counter++;
                 }
