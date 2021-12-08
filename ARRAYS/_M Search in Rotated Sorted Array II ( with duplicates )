@@ -1,0 +1,52 @@
+leetcode - https://leetcode.com/problems/search-in-rotated-sorted-array-ii/
+
+
+worst - O( n )
+
+code -
+
+class Solution {
+public:
+  bool search(vector<int>& arr, int target) {
+        
+        int s=0;
+        int n=arr.size();
+        int e=n-1;
+        
+        while(s<=e)
+        {
+            while(s<e and arr[s]==arr[s+1])
+                s++;
+             while(s<e and arr[e]==arr[e-1])
+                e--;
+            
+            int mid=(e+s)/2;
+            if(arr[mid]==target)
+                return true;
+            
+            if(arr[s]<=arr[mid])
+            {
+                if(target>=arr[s] and target<arr[mid])
+                {
+                    e=mid-1;
+                }
+                else
+                {
+                    s=mid+1;
+                }
+            }
+            
+            else
+            {
+                if(target>=arr[mid] and target<=arr[e])
+                    s=mid+1;
+                else
+                    e=mid-1;
+            }
+        }
+        
+        return false;
+        
+        
+    }
+};

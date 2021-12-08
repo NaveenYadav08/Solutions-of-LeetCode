@@ -1,0 +1,61 @@
+Leetode - https://leetcode.com/problems/maximum-equal-frequency/
+
+CODE 
+
+class Solution {
+public:
+    int maxEqualFreq(vector<int>& nums) {
+        // the key is the number, the value is it's occurance.
+        unordered_map<int, int> cnt;
+        
+        // the key is the occurance, the value is the set of numbers with the occurance.
+        unordered_map<int, unordered_set<int> > occur;
+        
+        int ans = 1;
+        for(int i=0; i<nums.size(); ++i) {
+            // update the value and occurance hashmaps
+            int a = nums[i];
+            if(!cnt.count(a)) {
+                occur[1].insert(a);
+            } else {
+                occur[cnt[a]].erase(a);
+                if(occur[cnt[a]].size() == 0) {
+                    occur.erase(cnt[a]);
+                }
+                occur[cnt[a] + 1].insert(a);
+            }
+            cnt[a]++;
+
+            // if the size of occurance map is 2, means there are only 2 different occurances.
+            if(occur.size() == 2) {
+                // occurance 1 has only one element (we can delete this element).
+                if(occur.count(1) && occur[1].size() == 1) {
+                    ans = i+1;
+                }
+                
+                auto it1 = occur.begin();
+                auto it2 = it1++;
+                // the diff between 2 occurances is 1, and the higher occurance set has one element.
+                // we can remove this number to make all numbers with the same, lower occurance.
+                if(it1->first == it2->first - 1 && it2->second.size() == 1) {
+                    ans = i+1;
+                } else if(it1->first == it2->first + 1 && it1->second.size() == 1) {
+                    ans = i+1;
+                }
+            } else if(occur.size() == 1) {
+                // all elements has 1 occurance, remove any one of them is fine.
+                if(occur.count(1)) {
+                    ans = i+1;
+                } else {
+                    // there is only one number in the entire prefix.
+                    auto it = occur.begin();
+                    if(it->second.size() == 1){
+                        ans = i + 1;
+                    }
+                }
+            }
+        }
+        
+        return ans;
+    }
+};

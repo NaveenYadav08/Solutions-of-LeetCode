@@ -1,0 +1,39 @@
+GFG - https://practice.geeksforgeeks.org/problems/-rearrange-array-alternately-1587115620/1
+
+Integer Trick - store 2 values in one integer
+
+CODE -
+class Solution{
+    public:
+    // This function wants you to modify the given input
+    // array and no need to return anything
+    // arr: input array
+    // n: size of array
+    //Function to rearrange  the array elements alternately.
+    void rearrange(long long *arr, int n) 
+    {
+    	long long maxx=arr[n-1]+1;
+    	int s1=0;int e1=n-1;
+    	while(s1<n)
+    	{
+    	    arr[s1]=arr[s1]*maxx + ((arr[e1]>=maxx)?arr[e1]/maxx:arr[e1]);
+    	    s1+=2;
+    	    e1--;
+    	}
+    	
+    	int s2=1;int e2=0;
+    	while(s2<n)
+    	{
+    	    arr[s2]=arr[s2]*maxx + ((arr[e2]>=maxx)?arr[e2]/maxx:arr[e2]);
+    	    s2+=2;
+    	    e2++;
+    	}
+    	
+    	for(int i=0;i<n;i++)
+    	{
+    	    arr[i]=arr[i]%maxx;
+    	    
+    	    
+    	}
+    }
+};

@@ -1,0 +1,32 @@
+Leetcode - https://leetcode.com/problems/subarray-product-less-than-k/
+
+sliding window
+
+
+CODE-
+
+class Solution {
+public:
+    int numSubarrayProductLessThanK(vector<int>& nums, int k) {
+        int ans=0;
+        int s=0;
+        int e=0;
+        long long p=1;
+        
+        for(;e<nums.size();e++)
+        {
+            p*=nums[e];
+            while(s<e and p>=k)
+            {
+                p/=nums[s];
+                s++;
+            }
+            if(p<k)
+            {
+                int len=e-s+1;
+                ans+=len;
+            }
+        }
+        return ans;
+    }
+};

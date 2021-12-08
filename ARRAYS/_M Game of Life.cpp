@@ -1,0 +1,81 @@
+//LEETCODE -  https://leetcode.com/problems/game-of-life/
+
+//CODE
+
+class Solution {
+public:
+    
+    
+        vector<int> dx{0,-1,0,1,-1,-1,1,1};
+        vector<int> dy{1,0,-1,0,-1,1,1,-1};
+    
+    bool isValid(int x,int y,int m,int n)
+    {
+        return (x >=0 && x < m && y >= 0 && y < n);
+    }
+    
+    
+
+    
+    void gameOfLife(vector<vector<int>>& board) {
+        int r = board.size();
+        int c = board[0].size();
+        
+        for (int i = 0; i < r; ++i)
+        {
+            for (int j = 0; j < c; ++j)
+                ++board[i][j];
+        }
+        
+        for(int i=0;i<board.size();i++)
+        {for(int j=0;j<board[0].size();j++)
+          { int live = 0;
+            for(int k =0;k<8;k++)
+            {
+                if(isValid(i+dx[k],j+dy[k],r,c))
+                {
+                        int t = board[i+dx[k]][j+dy[k]];
+                        int old = t%1097;
+                        if(old==2)
+                        live++;
+                }
+                
+                    
+            }
+           
+           int t = board[i][j];
+           int old = t%1097;
+           //cout<<old<<" "<<live<<" ";
+           
+           if(live<2)
+               board[i][j]= (1*1097)+old;
+           else if(live>3)
+               board[i][j]=(1*1097)+old;
+           else if(live==3 and old == 1)
+               board[i][j]=(2*1097)+old;
+           else if(live==2 or live ==3 )
+                   board[i][j]=(old*1097)+old;
+           
+           //cout<< board[i][j]/1097<<endl;
+           
+               
+            
+          }
+            
+        }
+        
+        for(int i=0;i<r;i++)
+            for(int j=0;j<c;j++)
+            {
+                int t = board[i][j]/1097;
+                board[i][j]=t-1;
+            }
+        
+
+    
+        
+        
+        
+        
+    }
+};
