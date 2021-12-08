@@ -12,67 +12,68 @@ class Solution
    string smallestWindow (string s, string p)
     {
         // Your code here
-        string ans ="";
-        map<char,int> p1;
-        for(int i=0;i<p.size();i++)
+        if(p.length()>s.length())
         {
-            p1[p[i]]++;
+            return "-1";
         }
-        
-        int mct = 0;
-        int dmct = p.size();
-        
-        map<char,int> s1;
-        int i=-1;
-        int j=-1;
-        while(true)
-        {   cout<<"jojo"<<endl;
-            bool flag1=false;
-            bool flag2=false;
-            cout<<i<<"  "<<(s.size()-1)<<"  "<<mct<<" "<<dmct<<endl;
-            int tt = (s.size()-1);
-            while(i<(tt) && mct<dmct)
-            {   cout<<"jojo"<<endl;
-                i++;
-                char ch = s[i];
-                s1[ch]++;
-                
-                if(s1[ch]<=p1[ch])
-                {
-                    mct++;
-                }
-                flag1 = true;
+        else
+        {
+            //using hash tables to store the count of characters in strings.
+            int shash[26]={0};
+            int phash[26]={0};
+            
+            //storing the count of characters in string p in hash table.
+            for(int i=0;i<p.length();i++)
+            {
+                phash[p[i]-'a']++;
             }
             
-            while(j<i && mct == dmct)
+            int counter=0;
+            int begin=0;
+            int startindex=-1;
+            int length=0;
+            int minlength=INT_MAX;
+            for(int i=0;i<s.length();i++)
             {
-                string pans = s.substr(j+1,i);
-                if(ans.size()==0 || pans.size()<ans.size())
+                //storing the count of characters in string s in hash table.
+                shash[s[i]-'a']++;
+                
+                //if count of current character in string s is equal to or less 
+                //than in string p, we increment the counter.
+                if(phash[s[i]]-'a'!=0&&shash[s[i]-'a']<=phash[s[i]-'a'])
                 {
-                    ans = pans;
-                }
-                j++;
-                if(s1[s[j]]==1)
-                {
-                    s1.erase(s[j]);
-                }
-                else
-                {
-                    s1[s[j]]--;
+                    counter++;
                 }
                 
-                if(s1[s[j]]<p1[s[j]])
+                //if all the characters are matched
+                if(counter==p.length())
                 {
-                    mct--;
+                    //we try to minimize the window.
+                    while(shash[s[begin]-'a']>phash[s[begin]-'a']||phash[s[begin]-'a']==0)
+                    {
+                        if(shash[s[begin]-'a']>phash[s[begin]-'a'])
+                        shash[s[begin]-'a']--;
+                        begin++;
+                    }
+                    //updating window size.
+                    length=i-begin+1;
+                    if(length<minlength)
+                    {
+                        //if new minimum sub-string is found, we store value
+                        //of its starting index for new found window.
+                        startindex=begin;
+                        minlength=length;
+                    }
+                    
                 }
-                flag2 = true;
             }
-            if(flag1 == false && flag2==false)
-            {
-                break;
-            }
+            
+            //returning the smallest window or -1 if no such window is present.
+            if(startindex==-1)
+                return "-1";
+            else
+                return s.substr(startindex,minlength);
         }
-        cout<<endl<<ans<<endl;
-        return ans;
+    
     }
 };
