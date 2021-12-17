@@ -36,3 +36,31 @@ public:
      return v[rand()%v.size()];   
   }
 };
+
+
+
+// ["RandomizedCollection", "insert", "insert", "insert", "getRandom", "remove", "getRandom"]
+// [[], [1], [1], [2], [], [1], []]
+
+// in this example 
+// 1 ->   0 , 1
+// 2  ->  2
+  
+//   vector< 1, 1, 2 >
+// so remove(1) 
+//   as 1 is not the last element inserted
+//   so index = 0;
+// v[0] = v.back() = 2;
+// vector<2,1,2>
+// table[2] sae erase v.size()-1 i.e  2 -> empty();
+// then table[2] insert(index)  2 -> 0
+  
+//   table[1].erase( 0 )  1 -> 1
+  
+  
+//   so after this 
+//   vector< 2, 1 >
+//   1 - > 1
+//   2 - > 0
+  
+  
