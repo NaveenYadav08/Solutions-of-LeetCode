@@ -91,6 +91,46 @@ public:
     }
 };
 
+
+
+██╗░░░░░███████╗██╗░░░██╗███████╗██╗░░░░░  ░█████╗░██████╗░██████╗░███████╗██████╗░
+██║░░░░░██╔════╝██║░░░██║██╔════╝██║░░░░░  ██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔══██╗
+██║░░░░░█████╗░░╚██╗░██╔╝█████╗░░██║░░░░░  ██║░░██║██████╔╝██║░░██║█████╗░░██████╔╝
+██║░░░░░██╔══╝░░░╚████╔╝░██╔══╝░░██║░░░░░  ██║░░██║██╔══██╗██║░░██║██╔══╝░░██╔══██╗
+███████╗███████╗░░╚██╔╝░░███████╗███████╗  ╚█████╔╝██║░░██║██████╔╝███████╗██║░░██║
+╚══════╝╚══════╝░░░╚═╝░░░╚══════╝╚══════╝  ░╚════╝░╚═╝░░╚═╝╚═════╝░╚══════╝╚═╝░░╚═╝
+
+class Solution {
+public:
+    vector<vector<int>> levelOrder(Node* root) {
+        vector<vector<int>>ans;
+        if(root == NULL)
+            return ans;
+        
+        queue<Node*>q;
+        q.push(root);
+        q.push(NULL);
+        vector<int>v;
+        
+        while(!q.empty()){
+            Node* frontNode = q.front();
+            q.pop();
+            if(frontNode == NULL){
+                ans.push_back(v);
+                v.clear();
+                if(q.empty())
+                    break;
+                q.push(NULL);
+                continue;
+            }
+            v.push_back(frontNode->val);
+            for(int i=0; i<frontNode->children.size(); i++){
+                q.push(frontNode->children[i]);
+            }
+        }
+        return ans;
+    }
+};
   
   
   
