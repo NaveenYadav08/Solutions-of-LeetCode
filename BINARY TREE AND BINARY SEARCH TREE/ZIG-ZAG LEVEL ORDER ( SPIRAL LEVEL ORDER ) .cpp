@@ -1,4 +1,9 @@
-// GFG - https://practice.geeksforgeeks.org/problems/level-order-traversal-in-spiral-form/1/#
+// GFG - 
+https://practice.geeksforgeeks.org/problems/level-order-traversal-in-spiral-form/1/#
+https://practice.geeksforgeeks.org/problems/zigzag-tree-traversal/1
+
+//leetcode
+https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/
 
 
 
@@ -56,7 +61,7 @@ vector<int> findSpiral(Node *root)
             
             RtoL=!RtoL;
             temp.clear();
-            
+            //🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥//
             if(!q.empty())
             q.push(NULL);
             
