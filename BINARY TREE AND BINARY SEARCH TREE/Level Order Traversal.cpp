@@ -3,6 +3,8 @@ https://practice.geeksforgeeks.org/problems/level-order-traversal/1
 
 Leetcode 
 https://leetcode.com/problems/binary-tree-level-order-traversal/
+https://leetcode.com/problems/binary-tree-level-order-traversal-ii/ 
+// this other one is simple just reverse the ans of above one or use a stack to do so 
 
 
 It is done using queue ( FIFO )
