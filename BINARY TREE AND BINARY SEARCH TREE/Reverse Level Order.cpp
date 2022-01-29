@@ -2,7 +2,8 @@ GFG
 https://practice.geeksforgeeks.org/problems/reverse-level-order-traversal/1#
 
 Same as level order just slight variation 
-reverse the vector of vector ans at the end , or insert right then left and rev ans at end.
+Reverse the vector of vector ans at the end , 
+OR  insert right then left and rev ans at end.
   
   
   
