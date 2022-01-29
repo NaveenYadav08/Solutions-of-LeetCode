@@ -12,6 +12,13 @@ It is done using queue ( FIFO )
 In queue insert NULL after every level end
 
 
+▄▀█ █░░ █▀▀ █▀█ █▀█ █ ▀█▀ █░█ █▀▄▀█ █▀▄▀█
+█▀█ █▄▄ █▄█ █▄█ █▀▄ █ ░█░ █▀█ █░▀░█ █░▀░█
+
+1 Push root in queue
+2 Until q is empty push left and right children of the front element and pop it
+
+
 █▀▀ █▀█ █▀▄ █▀▀
 █▄▄ █▄█ █▄▀ ██▄
 
