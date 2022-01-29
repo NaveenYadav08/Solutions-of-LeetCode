@@ -7,6 +7,8 @@ https://leetcode.com/problems/binary-tree-level-order-traversal-ii/
 // this other one is simple just reverse the ans of above one or use a stack to do so 
 
 
+// TC - O( n ) , SC - O( n )
+
 It is done using queue ( FIFO )
   
 In queue insert NULL after every level end
