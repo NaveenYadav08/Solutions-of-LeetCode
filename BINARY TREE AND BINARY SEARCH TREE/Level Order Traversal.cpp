@@ -44,7 +44,7 @@ public:
             TreeNode* T=q.front();
             q.pop();
             
-            if(T==NULL) // means begin of another level and start of one level 
+            if(T==NULL) // means begin of another level and end of one level 
             {
                 res.push_back(temp);
                 temp.clear();
