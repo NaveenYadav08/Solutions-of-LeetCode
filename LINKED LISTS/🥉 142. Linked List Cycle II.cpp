@@ -1,4 +1,5 @@
-![Delete loop](https://drive.google.com/file/d/1_mEKkN5VBhoG-7fETnBtbvk3M7M_3pLC/view?usp=sharing)
+![Delete loop](https://drive.google.com/file/d/1_mEKkN5VBhoG-7fETnBtbvk3M7M_3pLC/view?usp=sharing) 
+               // go to the link to see theory
                
                
                https://leetcode.com/problems/linked-list-cycle-ii/
@@ -31,6 +32,8 @@ public:
                 break;
         }
         
+        
+        //exception when loop start from head 
         if(low==head)
             return head;
         
