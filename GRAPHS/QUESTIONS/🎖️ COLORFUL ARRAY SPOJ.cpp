@@ -16,7 +16,7 @@ struct dsu
    void init(int n)
    {
        par.resize(n);
-       iota(par.begin(),par.end(),0); //iota is same to memset 
+       iota(par.begin(),par.end(),0); //iota add +x to index of every no and assign to that index
    }
 
    // parent of x // find fn here init all are parent of themself
