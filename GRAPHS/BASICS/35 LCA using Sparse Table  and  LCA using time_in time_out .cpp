@@ -14,7 +14,7 @@ const int N=100005, M=22;
 vector<int> gr[N];
 int Par[N][M],dep[N];
 int tin[N], tout[N],timer;
-
+// euler 3
 void dfs(int cur, int par)
 {  tin[cur] = ++timer;
 
