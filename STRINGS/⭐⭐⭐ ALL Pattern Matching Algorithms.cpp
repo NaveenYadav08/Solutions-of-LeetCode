@@ -1,3 +1,8 @@
+// strcmp (key,buffer) != 0 // return 1 if same else 0
+  
+// getline(cin, str); // input str with space
+
+
 // PATTERN SEARCHING ALGORITHMS ARE USED TO Find all occurrences of pat[] in txt[].
 
 █▄░█ ▄▀█ █ █░█ █▀▀   ▄▀█ █░░ █▀▀ █▀█ █▀█ █ ▀█▀ █░█ █▀▄▀█
