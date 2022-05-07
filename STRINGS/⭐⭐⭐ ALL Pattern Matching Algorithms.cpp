@@ -197,7 +197,7 @@ lps[] that tells us the count of characters to be skipped.
               which is also a suffix of pat[0..i]. 
 	a b d x a b d , here lps = a b d
 	
-The time complexity of KMP algorithm is O(n + m) in the worst case.
+The time complexity of KMP algorithm is O(n) in the worst case.
 
 
 █▀▀ █▀█ █▀▄ █▀▀
