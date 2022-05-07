@@ -66,7 +66,7 @@ or working
 class Solution
 {
 	public:
-	void helper(string S, vector<string>& ans, int i, int n)
+	void helper(string &S, vector<string>& ans, int i, int n)
 	{
 	    if(i==n)
 	    {
@@ -90,4 +90,26 @@ class Solution
 		    sort(ans.begin(),ans.end());
 		    return ans;
 		}
+};
+
+
+
+CODE 3 
+	STL 
+
+class Solution
+{
+    public:
+        vector<string>find_permutation(string S)
+        {
+            vector<string>res;
+            // sort the string in lexicographically order
+            sort(S.begin(), S.end());
+            do
+            {
+                // keep adding while there is next permutation
+                res.push_back(S);
+            }while(next_permutation(S.begin(), S.end()));
+            return res;
+        }
 };
