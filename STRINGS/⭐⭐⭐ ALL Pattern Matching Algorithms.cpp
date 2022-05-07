@@ -204,7 +204,7 @@ The time complexity of KMP algorithm is O(n) in the worst case.
 █▄▄ █▄█ █▄▀ ██▄
 
 
-#include <bits/stdc++.h
+#include <bits/stdc++.h>
   
 void computeLPSArray(char* pat, int M, int* lps);
   
