@@ -55,3 +55,50 @@ public:
         return true;
     }
 };
+
+
+// constant space O ( 1 ) space 
+
+// code 
+class Solution {
+public:
+    bool checkValidString(string s) {
+        
+        int ext = 0, cnt = 0; // ext star and cnt bracket
+        
+        for(int i = 0; i < s.length(); i++)
+        {
+            if(s[i]=='(')
+                cnt++;
+            
+            else if(s[i] == '*')
+                ext++;
+            
+            else
+            {
+                cnt--;
+               //  more close bracket  and stars cant compensate them 
+                if(cnt < 0 && (cnt + ext) < 0)
+                    return false;
+            }
+        }
+        
+        
+        cnt = 0;
+        ext = 0;
+        for(int i = s.length()-1;i >= 0; i--)
+        {
+            if(s[i]==')')
+                cnt++;
+            else if(s[i] == '*')
+                ext++;
+            else
+            {
+                cnt--;
+                if(cnt < 0 && (cnt + ext) < 0)
+                    return false;
+            }
+        }
+        return true;
+    }
+};
