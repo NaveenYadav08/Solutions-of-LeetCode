@@ -41,6 +41,8 @@ int dijkstraSingleTarget(Graph g, int source, int target, int k){
         for(auto &[nextNode, nextWeight] : g.adj[curNode]){
             int nextDist = curDist + nextWeight;
             int nextStops = curStops + 1;
+         
+         // minimize stops or distance 
             if(nextDist < dist[nextNode] || nextStops < stops[nextNode]){
                 dist[nextNode] = nextDist;
                 stops[nextNode] = nextStops;
