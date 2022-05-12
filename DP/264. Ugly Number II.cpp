@@ -7,6 +7,9 @@ public:
 int nthUglyNumber(int n) {
 vector<int> dp(n);
 dp[0]=1;
+    
+    // indexes 
+    
 int p2=0;
 int p3=0;
 int p5=0;
