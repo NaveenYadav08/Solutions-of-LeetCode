@@ -211,6 +211,7 @@ int maxtwobuysell(int arr[],int size) {
 
 ( Atmost k  transaction )
         
+        // LINK - https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/
         
         
 ▄▀█ █░░ █▀▀ █▀█ █▀█ █ ▀█▀ █░█ █▀▄▀█
@@ -276,7 +277,7 @@ Here profit[t-1][j] is best we could have done with one less transaction till jt
 █▀█ █▀█ ▀█▀ █ █▀▄▀█ █ ▀█ █▀▀ █▀▄   ▄▀█ █░░ █▀▀ █▀█ █▀█ █ ▀█▀ █░█ █▀▄▀█
 █▄█ █▀▀ ░█░ █ █░▀░█ █ █▄ ██▄ █▄▀   █▀█ █▄▄ █▄█ █▄█ █▀▄ █ ░█░ █▀█ █░▀░█
 
-
+TC = SC = O ( K * N )
 
 
 If we observe 
@@ -342,9 +343,270 @@ int maxProfit(int price[], int n, int k)
 
 
 
+█▄▄ █░█ █▄█   ▄▀█ █▄░█ █▀▄   █▀ █▀▀ █░░ █░░   █▀ ▀█▀ █▀█ █▀▀ █▄▀   ▄▄   █░█
+█▄█ █▄█ ░█░   █▀█ █░▀█ █▄▀   ▄█ ██▄ █▄▄ █▄▄   ▄█ ░█░ █▄█ █▄▄ █░█   ░░   ▀▄▀
+
+Best Time to Buy and Sell Stock with Transaction Fee ( as many as Transactions ) 
+  
+// LINK - https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/
+        
+        THEORY - See Photos 
+        // states and DP used 
+        //  TC = O  ( N ) = SC
+        
+ 𝓒𝓞𝓓𝓔 - 
+        
+class Solution {
+public:
+    int n, a;
+    
+    int maxProfit(vector<int>& prices, int fee) {
+        n = prices.size(), a = fee;
+        vector<vector<int>> memo(n+1, vector<int>(2));
+        dp(memo, prices, 0, 0);
+        return memo[0][0];
+    }
+    
+    
+    int dp(vector<vector<int>>& memo, vector<int>& prices, int index, int holding){
+        if(index == n) return 0; 
+        if(memo[index][holding])
+            return memo[index][holding];
+        if(holding)
+        {   int op1=prices[index] - a + dp(memo, prices, index + 1, 0);
+            int op2=dp(memo, prices, index + 1, 1);
+            
+            memo[index][holding] = max(op1, op2);
+        }
+        else
+            memo[index][holding] = max(-prices[index] + dp(memo, prices, index + 1, 1), dp(memo, prices, index + 1, 0));
+        return memo[index][holding];
+    }
+};
 
 
 
+█▀ █▀█ ▄▀█ █▀▀ █▀▀   █▀█ █▀█ ▀█▀ █ █▀▄▀█ █ ▀█ █▀▀
+▄█ █▀▀ █▀█ █▄▄ ██▄   █▄█ █▀▀ ░█░ █ █░▀░█ █ █▄ ██▄
+
+       THEORY - See Photos 
+      
+      𝓒𝓞𝓓𝓔 - 
+        
+
+class Solution {
+public:
+    int n, a;
+    
+    
+    int maxProfit(vector<int>& prices, int fee) {
+        n = prices.size(), a = fee;
+        
+       return fun(prices);
+        
+    }
+    
+    
+    int fun(vector<int>& prices){
+        int ab, anb, cb, cnb;
+            ab=anb=0;
+           for(int index=n-1;index>=0;index--)
+               
+           { // this is the part of buy = 1
+            int op1= prices[index] - a + ab;
+            int op2= anb;
+            
+            cnb = max(op1, op2);
+        
+        // this is buy -  0
+           cb = max(-prices[index] + anb, ab );
+        
+        
+        ab=cb;
+        anb=cnb; }
+        
+        return ab;
+        
+    }
+};
+
+
+⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
+        
+        
+        
+
+█▄▄ █░█ █▄█   ▄▀█ █▄░█ █▀▄   █▀ █▀▀ █░░ █░░   █▀ ▀█▀ █▀█ █▀▀ █▄▀   ▄▄   █░█ █
+█▄█ █▄█ ░█░   █▀█ █░▀█ █▄▀   ▄█ ██▄ █▄▄ █▄▄   ▄█ ░█░ █▄█ █▄▄ █░█   ░░   ▀▄▀ █
+
+
+
+█▀▀ █▀█ █▀█ █░░ █▀▄ █▀█ █░█░█ █▄░█
+█▄▄ █▄█ █▄█ █▄▄ █▄▀ █▄█ ▀▄▀▄▀ █░▀█
+
+
+( as many as Transactions ) 
+        
+        
+        // theory - for both DP 
+        // video - https://www.youtube.com/watch?v=IGIe46xw3YY
+        
+DP - 𝓒𝓞𝓓𝓔 -  
+TC = SC = N
+
+class Solution {
+public:
+    int cooldown=1;
+    int f(int ind, int buy, vector<int>& prices, vector<vector<int>> &dp)
+    {
+        if(ind>=prices.size()) return 0;
+        if(dp[ind][buy]!=-1) return dp[ind][buy];
+        int profit = INT_MIN;
+        if(buy) // if i can buy
+        {
+             profit = max(-prices[ind] + f(ind+1,0,prices,dp) ,  f(ind+1,1,prices,dp));
+        }
+        else
+        {
+            profit = max(prices[ind] + f(ind+1+cooldown,1,prices,dp) ,  f(ind+1,0,prices,dp));
+        }  
+        
+        return dp[ind][buy]=profit;
+    }
+    
+    int maxProfit(vector<int>& prices) {
+        int n = prices.size();
+        vector<vector<int>> dp(n,vector<int>(2,-1));
+        return f(0, 1, prices, dp);
+    }
+};
+        
+
+
+🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+
+        I USED THE STATE METHOD SEE NOTEBOOK FOR THIS 
+        
+TC = O ( N ) 
+        SC = O ( 1 ) 
+        
+        
+        
+ 𝓒𝓞𝓓𝓔 -     
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int n = prices.size();
+        if(n<=1)
+            return 0;
+        // vector<int> noStock(n,0),inHand(n,0),Sold(n,0);
+        // BUUT I ONLY NEED PREV STATE SO 2 is enough
+        
+        vector<int> noStock(2,0),inHand(2,0),Sold(2,0);
+        
+        noStock[0] = 0;
+        inHand[0] = -prices[0];    //bcoz we have bought a stock and never sold it
+        Sold[0] = 0;
+        
+        for(int i=1;i<n;++i)
+        {
+            noStock[i%2] = max(noStock[(i-1)%2],Sold[(i-1)%2]);
+            inHand[i%2] = max(inHand[(i-1)%2],noStock[(i-1)%2]-prices[i]);
+            Sold[i%2] = inHand[(i-1)%2]+prices[i];
+        }
+        int result = max(noStock[(n-1)%2],Sold[(n-1)%2]);
+        return result;
+    }
+};        
+        
+⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
 
 
