@@ -25,6 +25,7 @@ int maxProfit(vector<int>& prices)
 }
 
 
+⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
 
 █▄▄ █░█ █▄█   ▄▀█ █▄░█ █▀▄   █▀ █▀▀ █░░ █░░   █▀ ▀█▀ █▀█ █▀▀ █▄▀   ▄▄   █ █
 █▄█ █▄█ ░█░   █▀█ █░▀█ █▄▀   ▄█ ██▄ █▄▄ █▄▄   ▄█ ░█░ █▄█ █▄▄ █░█   ░░   █ █
@@ -88,7 +89,7 @@ public:
 };
 
 
-
+⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
 
 █▄▄ █░█ █▄█   ▄▀█ █▄░█ █▀▄   █▀ █▀▀ █░░ █░░   █▀ ▀█▀ █▀█ █▀▀ █▄▀   ▄▄   █ █ █
 █▄█ █▄█ ░█░   █▀█ █░▀█ █▄▀   ▄█ ██▄ █▄▄ █▄▄   ▄█ ░█░ █▄█ █▄▄ █░█   ░░   █ █ █
@@ -201,3 +202,193 @@ int maxtwobuysell(int arr[],int size) {
 
 
 ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
+
+
+
+█▄▄ █░█ █▄█   ▄▀█ █▄░█ █▀▄   █▀ █▀▀ █░░ █░░   ▄▄   █ █░█
+█▄█ █▄█ ░█░   █▀█ █░▀█ █▄▀   ▄█ ██▄ █▄▄ █▄▄   ░░   █ ▀▄▀
+
+
+( Atmost k  transaction )
+        
+        
+        
+▄▀█ █░░ █▀▀ █▀█ █▀█ █ ▀█▀ █░█ █▀▄▀█
+█▀█ █▄▄ █▄█ █▄█ █▀▄ █ ░█░ █▀█ █░▀░█
+
+TC - Cubic   O ( k * N * N ) , SC -  O ( N * K )
+        
+ DP Approach 
+ 
+In this post, we are only allowed to make at max k transactions. The problem can be solved by using dynamic programming. 
+1 Let profit[t][i] represent maximum profit using at most t transactions up to day i (including day i). 
+2 Then the relation is:
+profit[t][i] = max(profit[t][i-1], max(price[i] – price[j] + profit[t-1][j])) 
+                                           for all j in range [0, i-1] 
+3 profit[t][i] will be maximum of – 
+
+profit[t][i-1] which represents not doing any transaction on the ith day.
+                                                   
+Maximum profit gained by selling on ith day. In order to sell shares on ith day, we need to purchase it on any one of [0, i – 1] days. 
+                                                   
+If we buy shares on jth day and sell it on ith day, max profit will be price[i] – price[j] + profit[t-1][j] where j varies from 0 to i-1. 
+Here profit[t-1][j] is best we could have done with one less transaction till jth day.
+                                                   
+                                                   
+   𝓒𝓞𝓓𝓔 - 
+                                                   
+  int maxProfit(int price[], int n, int k)
+{
+    // table to store results of subproblems
+    // profit[t][i] stores maximum profit using
+    // atmost t transactions up to day i (including
+    // day i)
+    int profit[k + 1][n + 1];
+ 
+    // For day 0, you can't earn money
+    // irrespective of how many times you trade
+    for (int i = 0; i <= k; i++)
+        profit[i][0] = 0;
+ 
+    // profit is 0 if we don't do any transaction
+    // (i.e. k =0)
+    for (int j = 0; j <= n; j++)
+        profit[0][j] = 0;
+ 
+    // fill the table in bottom-up fashion
+    for (int i = 1; i <= k; i++) {
+        for (int j = 1; j < n; j++) {
+            int max_so_far = INT_MIN;
+ 
+            for (int m = 0; m < j; m++)
+                max_so_far = max(max_so_far,
+                                 price[j] - price[m] + profit[i - 1][m]);
+ 
+            profit[i][j] = max(profit[i][j - 1], max_so_far);
+        }
+    }
+ 
+    return profit[k][n - 1];
+}
+
+
+
+█▀█ █▀█ ▀█▀ █ █▀▄▀█ █ ▀█ █▀▀ █▀▄   ▄▀█ █░░ █▀▀ █▀█ █▀█ █ ▀█▀ █░█ █▀▄▀█
+█▄█ █▀▀ ░█░ █ █░▀░█ █ █▄ ██▄ █▄▀   █▀█ █▄▄ █▄█ █▄█ █▀▄ █ ░█░ █▀█ █░▀░█
+
+
+
+
+If we observe 
+profit[t][i] = max(profit [t][i-1], max(price[i] – price[j] + profit[t-1][j])) 
+                            for all j in range [0, i-1]
+                            
+                                    
+If we carefully notice, 
+max(price[i] – price[j] + profit[t-1][j]) 
+for all j in range [0, i-1]
+
+can be rewritten as, 
+
+= price[i] + max(profit[t-1][j] – price[j]) 
+for all j in range [0, i-1] .                                  
+                                   
+
+
+
+= price[i] + max(prevDiff, profit[t-1][i-1] – price[i-1]) 
+where prevDiff is max(profit[t-1][j] – price[j]) 
+for all j in range [0, i-2]
+
+
+   𝓒𝓞𝓓𝓔 - 
+        
+        
+int maxProfit(int price[], int n, int k)
+{
+    // table to store results of subproblems
+    // profit[t][i] stores maximum profit using atmost
+    // t transactions up to day i (including day i)
+    int profit[k + 1][n + 1];
+ 
+    // For day 0, you can't earn money
+    // irrespective of how many times you trade
+    for (int i = 0; i <= k; i++)
+        profit[i][0] = 0;
+ 
+    // profit is 0 if we don't do any transaction
+    // (i.e. k =0)
+    for (int j = 0; j <= n; j++)
+        profit[0][j] = 0;
+ 
+    // fill the table in bottom-up fashion
+    for (int i = 1; i <= k; i++) {
+        int prevDiff = INT_MIN;
+        for (int j = 1; j < n; j++) {
+            prevDiff = max(prevDiff,
+                           profit[i - 1][j - 1] - price[j - 1]);
+            profit[i][j] = max(profit[i][j - 1],
+                               price[j] + prevDiff);
+        }
+    }
+ 
+    return profit[k][n - 1];
+}
+
+
+
+⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
