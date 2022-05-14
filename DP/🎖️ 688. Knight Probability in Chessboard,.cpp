@@ -15,7 +15,7 @@ bool inbound(int i,int j,int n)
     if(i>=0 && i<n && j>=0 && j<n)
         return true;
     return false;
-
+}
     
 // make 2 borads prevstarte and currstate    
 double knightProbability(int n, int k, int r, int c) {
