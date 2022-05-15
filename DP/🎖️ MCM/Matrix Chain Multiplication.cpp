@@ -1,3 +1,7 @@
+// LINK https://practice.geeksforgeeks.org/problems/matrix-chain-multiplication0303/1/
+
+// https://www.youtube.com/watch?v=vRVfmbCFW7Y&t=12s&ab_channel=takeUforward
+
 Matrix Chain Multiplication
 Given a sequence of matrices, find the most efficient way to multiply these matrices together.
 
