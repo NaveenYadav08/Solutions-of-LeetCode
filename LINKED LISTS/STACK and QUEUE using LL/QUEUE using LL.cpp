@@ -15,7 +15,7 @@ struct MyQueue {
     void push(int);
     int pop();
     MyQueue() {front = rear = NULL;}
-}; */
+}; 
 
 //Function to push an element into the queue.
 void MyQueue:: push(int a)
