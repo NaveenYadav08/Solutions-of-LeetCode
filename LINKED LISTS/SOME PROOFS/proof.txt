@@ -1,0 +1,3 @@
+// first node in cycle ka proof 
+
+// cycle detect ka poof
