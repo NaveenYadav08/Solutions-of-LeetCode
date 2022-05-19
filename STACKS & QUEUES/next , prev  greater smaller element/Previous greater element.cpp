@@ -1,6 +1,14 @@
 // link  https://www.geeksforgeeks.org/previous-greater-element/
 
 
+// iterate 1 to <n
+// ans of Arr[0]=-1
+// while(not empty and top <= srr[i]) pop 
+
+// if(empty) ans[i]=-1;
+// else ANS[i]=stack top()
+//push (srr[i]) // each time;
+
 // code 
 
 void prevGreater(int arr[], int n)
