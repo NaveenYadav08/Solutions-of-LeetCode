@@ -2,6 +2,12 @@ https://leetcode.com/problems/tallest-billboard/
 
 🎖️ 956. Tallest Billboard.cpp
 
+// dp lia hae [ sum ] [ index ] ka 
+
+// now  sum in the recursion add or sub  or ignore 
+
+// add rod len in max of ( add,sub)
+
 class Solution {
 public:
     int dp[5001][21];
