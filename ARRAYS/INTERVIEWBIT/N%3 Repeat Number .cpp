@@ -19,28 +19,37 @@ int Solution::repeatedNumber(const vector<int> &A) {
         {
             cnt2++;
         }
-        else if(num1==-1)
-        {
-            num1=A[i];
-            cnt1=1;
-        }
         else if(cnt1==0)
-        {
+        {   num1=A[i];
             cnt1++;
-        }
-        else if(num2==-1)
-        {
-            num2=A[i];
-            cnt2=1;
         }
         else if(cnt2==0)
         {
             cnt2++;
+            num2=A[i];
+        }
+        else
+        {
+            cnt1--;
+            cnt2--;
         }
         
     }
     
+    int c1=0; int c2=0;
+    
+    for(int i=0;i<n;i++)
+    {
+        if(num1==A[i])
+        c1++;
+        else if(num2==A[i])
+        c2++;
+    }
+    
+    if(c1>(n/3))
+    return num1;
+    else if(c2>(n/3))
+    return num2;
+    
     return -1;
-    
-    
 }
