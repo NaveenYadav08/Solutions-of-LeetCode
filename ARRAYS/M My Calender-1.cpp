@@ -1,5 +1,7 @@
 // Leetcode -  https://leetcode.com/problems/my-calendar-i/
 
+
+// i learned that if in set only 1 element prev will give that same ele itselg
 // CODE 
 class MyCalendar {
 public:
