@@ -1,5 +1,7 @@
 // LEETCODE _  https://leetcode.com/problems/max-chunks-to-make-sorted-ii/
 
+https://www.youtube.com/watch?v=GxTo3agdnjs
+
 // CODE 
 class Solution {
 public:
