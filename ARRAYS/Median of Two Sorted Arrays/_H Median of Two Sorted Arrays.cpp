@@ -1,5 +1,5 @@
 Leetcode -  https://leetcode.com/problems/median-of-two-sorted-arrays/
-
+https://www.youtube.com/watch?v=NTop3VTjmxk
 CODE - 
 class Solution {
 public:
