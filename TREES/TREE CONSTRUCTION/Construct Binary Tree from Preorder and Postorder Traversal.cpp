@@ -1,6 +1,7 @@
 https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/
 
 
+
 class Solution {
 public:
 //     TreeNode* constructFromPrePost(vector<int>& preorder, vector<int>& postorder) {
@@ -10,7 +11,7 @@ public:
     int preIndex=0;
 unordered_map<int,int> m;
 
-TreeNode* constructTreeUtil (vector<int>& pre, vector<int>& post, int& preIndex,
+TreeNode* constructTreeUtil (vector<int>& pre, vector<int>& post,
 								int l, int h, int size)
 {
 	// Base case
@@ -31,13 +32,12 @@ TreeNode* constructTreeUtil (vector<int>& pre, vector<int>& post, int& preIndex,
 
 	// Use the index of element found in postorder to divide
 		// postorder array in two parts. Left subtree and right subtree
-	if (i <= h)
-	{
-		root->left = constructTreeUtil (pre, post, preIndex,
+	
+		root->left = constructTreeUtil (pre, post, 
 												l, i, size);
-		root->right = constructTreeUtil (pre, post, preIndex,
+		root->right = constructTreeUtil (pre, post,
 												i + 1, h-1, size);
-	}
+	
 
 	return root;
 }
@@ -53,7 +53,7 @@ TreeNode *constructFromPrePost (vector<int>& pre, vector<int>& post)
     {
         m[post[i]]=i;
     }
-	return constructTreeUtil (pre, post, preIndex, 0, size - 1, size);
+	return constructTreeUtil (pre, post, 0, size - 1, size);
 }
 };
 
