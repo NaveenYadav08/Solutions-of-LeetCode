@@ -8,52 +8,47 @@ public:
             TreeNode* node=new TreeNode(val);
             node->left=root;
             return node;
-    
         }
-      
-      
+        
         queue<TreeNode*> q;
-        q.push(root);q.push(NULL);
-        int lvl=1;
-        vector<TreeNode*> v1;
-
-        while(q.size()>0){
-            TreeNode* src=q.front();q.pop();
-            if(src!=NULL){
-                v1.push_back(src);
-                if(src->left){
-                    q.push(src->left);
-                }if(src->right){
-                    q.push(src->right);
-                }
-                
-            }else{
-                if(lvl==depth-1){
-                    break;
-                }
-                if(q.size()!=0){
-                    q.push(NULL);
-                    v1.clear();
-                }
-                
-                lvl++;
+        q.push(root);
+        int lvl = 0;
+        vector<TreeNode*> a;
+        while(!q.empty())
+        {   lvl++;
+            //cout<<lvl<<endl;
+            int n = q.size();
+            for(int i=0;i<n;i++)
+            {   TreeNode* tmp = q.front();
+                q.pop();
+                if(lvl==depth-1)
+                a.push_back(tmp);
+             if(tmp->left)
+                 q.push(tmp->left);
+             if(tmp->right)
+                 q.push(tmp->right);
+             
             }
-        }
-        for(int i=0;i<v1.size();i++){
-       
-            TreeNode* l=v1[i]->left;
-            TreeNode* r=v1[i]->right;
-            
-            
-                TreeNode* node=new TreeNode(val);
-                v1[i]->left=node;
-                node->left=l;
-            
-                TreeNode* Node=new TreeNode(val);
-                v1[i]->right=Node;
-                Node->right=r;
+            if(lvl==depth-1) break;
             
         }
+        
+        for( auto x:a )
+        {
+            TreeNode* T= new TreeNode (val);
+            TreeNode* TT=new TreeNode (val);
+            TreeNode* L = x->left;
+            TreeNode* R = x->right;
+            x->left=T;
+            T->left = L;
+            x->right=TT;
+            TT->right=R;
+            
+        }
+   
+        
+        
         return root;
+
     }
 };
