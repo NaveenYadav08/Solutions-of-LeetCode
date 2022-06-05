@@ -7,7 +7,7 @@ public:
     vector<TreeNode*> Nodepath; //stored here root to target tk kae nodes
     bool Nodetoroot(TreeNode* root,TreeNode* target){
         if(root==NULL) return false;
-        
+        // IT IS TO GET PATH  IN NODE TO ROOT FASHION
         if(root==target){
             Nodepath.push_back(root);
             return true;
