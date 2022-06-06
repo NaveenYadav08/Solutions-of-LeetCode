@@ -58,6 +58,8 @@ bool contains_cycle()
      { if(!visited[i])
        if(cycle_helper(i,visited,-1)) return true;
      }
+    
+    return false;
 
 }
 
