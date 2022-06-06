@@ -19,7 +19,7 @@ class Solution {
         
         long cou=0;
         
-        for(int i=0; i<graph.size(); i++){
+        for(int i=0; i<graph.size(); i++){ // to go to all adjacent of current
             if(graph[u][i]==1)
                 cou += fun(graph, i, v, k-1, dp) % mod;
         }
