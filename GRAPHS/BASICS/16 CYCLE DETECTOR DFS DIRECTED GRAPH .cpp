@@ -38,7 +38,8 @@ bool cycle_helper( int node, bool *visited, bool *arrayy)
            
 
         }
-        // nbr visit and part of current path
+        // nbr visit and part of current path backedge , means that the node is visited and part of curr path 
+        // for those who are vis but not part of curr path are not cycle 
         else if(arrayy[nbr]==true)
         {
            return true;
