@@ -51,7 +51,7 @@ bool cycle_helper( int node, bool *visited, bool *arrayy)
 }
 
 bool contains_cycle()
-{// CHeck for cycle in Directed Graph
+{  // CHeck for cycle in Directed Graph
      bool *visited =new bool[V];
      bool *arrayy = new bool[V];
      for( int i=0; i<V; i++ )
@@ -60,7 +60,13 @@ bool contains_cycle()
          arrayy[i]=false;
 
      }
-    return cycle_helper(0,visited,arrayy);
+    
+    for(int i=0;i<V;i++)
+     {
+        if(!visited[i])
+        if(cycle_helper(i,visited,arrayy) return true;
+     }
+     return false;
 
 }
 
