@@ -47,13 +47,17 @@ bool cycle_helper( int node, bool *visited, int parent)
 }
 
 bool contains_cycle()
-{// CHeck for cycle in Directed Graph
+{ // CHeck for cycle in Directed Graph
      bool *visited =new bool[V];
      for( int i=0; i<V; i++ )
      {
          visited[i]=false;
      }
-    return cycle_helper(0,visited,-1);
+    
+    for(int i=0;i<V;i++)
+     { if(!visited[i])
+       if(cycle_helper(i,visited,-1)) return true;
+     }
 
 }
 
