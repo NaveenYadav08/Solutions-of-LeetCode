@@ -28,6 +28,7 @@ class Graph
        // other  array
        // visited array denotes wheter a node has been inluded in MST or not
        bool * visited = new bool[V]{0};
+     // vector of bool
        int ans=0;
        //begin
        Q.push({0,0}); // weight , node
