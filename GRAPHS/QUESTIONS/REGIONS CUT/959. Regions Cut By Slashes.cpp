@@ -14,15 +14,19 @@ https://www.youtube.com/watch?v=Wafu5vOxPRE&t=1222s
 
 class Solution {
 public:
-vector<int> rank;
-vector<int> parent;
+    
+vector<int> rank;  //RANK 
+vector<int> parent;  //PARENT
 int count;
+    
 int findparent(int node)
-{
+{ //initially par[x]=x;
     if(node==parent[node])
         return node;
     return parent[node]=findparent(parent[node]);
 } 
+    
+
 void unionn(int u,int v)
 {
     u=findparent(u);
