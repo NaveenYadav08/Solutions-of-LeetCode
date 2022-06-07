@@ -29,24 +29,24 @@ int findparent(int node)
 
 void unionn(int u,int v)
 {
-    u=findparent(u);
-    v=findparent(v);
-    if(u!=v)
-    {
-    if(rank[u]<rank[v])
-        parent[u]=v;
-    else if(rank[u]>rank[v])
-        parent[v]=u;
-    
+    int s1=findparent(u);
+    int s2=findparent(v);
+     if(s1!=s2)
+     {   
+          if(rank[s1]<rank[s2])
+         {parent[s1]=s2;
+         rank[s2]+=  rank[s1];
+         }
+        else
+         {parent[s2]=s1;
+         rank[s1]+=rank[s2];
+         
+         }
+
+     }
     else
     {
-        parent[v]=u;
-        rank[u]++;
-    }
-    }
-    else
-    {
-        count++;
+        count++; //in same region rgn++
     }
         
 }
@@ -73,7 +73,7 @@ int regionsBySlashes(vector<string>& grid)
             if(i==0 or j==0 or i==dots-1 or j==dots-1)
             {
                 int cellno=i*dots+j;
-                if(cellno!=0)
+                if(cellno!=0) // bcz i dont want to do rgn++ for 0,0 union
                 unionn(0,cellno);
                 // BOUNDRY ko ek set me krdia 
             }
