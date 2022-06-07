@@ -28,12 +28,26 @@ bool dfs(vector<int> graph[], int N)
   // 0 - not visited 1-visited clr 1, 2-visited clr2
   int color=1;
 
-     int ans=dfs_helper(graph,0,visited,-1,color);
+   
+    for(int i=0;i<N;i++)
+    {
+        if(visited[i]==0)
+        {
+            if(dfs_helper(graph,i,visited,-1,color)==false)
+              return false;
+        }
+    }
+        
+   
+    
+    
+    
+    
      for( int i=0;i<N;i++)
      {
          cout<<i<<"- Color " <<visited[i]<<endl;
      }
-     return ans;
+      return true;
 
 }
 
