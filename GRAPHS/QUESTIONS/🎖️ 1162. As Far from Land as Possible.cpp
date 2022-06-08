@@ -1,5 +1,7 @@
 https://leetcode.com/problems/as-far-from-land-as-possible/
 
+https://leetcode.com/problems/as-far-from-land-as-possible/discuss/1936891/c%2B%2B-solution-explained-with-images-and-notes
+
 class Solution {
 public:
     int maxDistance(vector<vector<int>>& grid) {
