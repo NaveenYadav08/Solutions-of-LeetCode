@@ -34,13 +34,13 @@ public:
 
             if(occur.size() == 2) {
 
-                if(occur.count(1) && occur[1].size() == 1) {
+                if(occur.count(1) && occur[1].size() == 1) {  // 2 2 2 2 3
                     ans = i+1;
                 }
                 
                 auto it1 = occur.begin();
                 auto it2 = it1++;
-
+               //  2 2 2 4 4 4 5 5 5 5
                 if(it1->first == it2->first - 1 && it2->second.size() == 1) {
                     ans = i+1;
                 } else if(it1->first == it2->first + 1 && it1->second.size() == 1) {
@@ -48,11 +48,11 @@ public:
                 }
             } else if(occur.size() == 1) {
 
-                if(occur.count(1)) {
+                if(occur.count(1)) { // 1 2 3 4 5 
                     ans = i+1;
                 } else {
 
-                    auto it = occur.begin();
+                    auto it = occur.begin();  // 2 2 2 2 2 2 2
                     if(it->second.size() == 1){
                         ans = i + 1;
                     }
