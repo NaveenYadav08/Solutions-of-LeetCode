@@ -12,7 +12,8 @@ string duplicate(int l,string &s){
     unordered_map<ull,int>val;
 	// using map to store the hash_codes of visited strings
 	
-	// Eg. hash_code for substring of length 5 from 0 to 4 is calculated as: s[4]*d^4+s[3]*d^3+s[2]*d^2+s[1]*d+s[0]
+	// Eg. hash_code for substring of length 5 from 0 to 4 is calculated as: s[4]+s[3]*d+s[2]*d^2+s[1]*d^3+s[0]*d^4
+    
 	// We can use this hash_code to calculate hash-code for next substring from 1 to 5 as: (hash_code*d)-(s[0]*d^5)+s[5]
 	
     ull curr_hash=0,power=1;
