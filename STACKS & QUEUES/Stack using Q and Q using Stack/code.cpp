@@ -38,6 +38,7 @@ public:
 
 
 //using two queues
+// top = front 
 
 
 class MyStack {
