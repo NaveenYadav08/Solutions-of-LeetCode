@@ -2,6 +2,8 @@ https://leetcode.com/problems/design-circular-queue/
 
 
 622. Design Circular Queue
+// add at rear end rear++
+// del from front front ++
 
 
 
@@ -62,7 +64,7 @@ public:
 		if(isEmpty()) {
 			return -1;
 		}
-		return arr[(rearIndex + capacity - 1) % capacity];
+		return arr[(rearIndex + capacity - 1) % capacity]; // kyoki mae add krke rear ++ kr deta hu to wo ek pst aage chala jata hae
 	}
 
 	bool isEmpty() {
