@@ -80,11 +80,13 @@ class Solution
                 minHeap.push(top);
             }
             
-            vector<pair<char,string>> res;
+           vector<pair<char,string>> res;
+            vector<string> go;
             getCodes(minHeap.top(), "",res);
             for(auto x:res)
-            cout<<x.first<<" "<<x.second<<endl;
-            vector<string> go;
+            { cout<<x.first<<" "<<x.second<<endl;
+            go.push_back(x.second);}
             return go;
+			
 		}
 };
