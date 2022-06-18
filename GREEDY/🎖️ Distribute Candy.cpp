@@ -1,6 +1,8 @@
 https://www.interviewbit.com/problems/distribute-candy/
 https://leetcode.com/problems/candy/
 
+https://www.youtube.com/watch?v=Ya-LfQ0OBkU&t=789s
+
 
 class Solution {
 public:
