@@ -31,6 +31,11 @@ public:
 
 
 // CONSTANT SPACE //
+//  As the values in an increasing/decreasing sequence differ by 1, the number of chocolates distributed to students in a specific subarray 
+//  of k elements will be sum of k natural numbers. And the count will be k for a flat sequence as all the values are 1. 
+//  The required value will be the total sum of the results of subarrays.
+
+
 class Solution {
   public:
     
