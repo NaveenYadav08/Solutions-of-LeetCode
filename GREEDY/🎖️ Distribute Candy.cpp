@@ -3,6 +3,9 @@ https://leetcode.com/problems/candy/
 
 https://www.youtube.com/watch?v=Ya-LfQ0OBkU&t=789s
 
+// MUST SEE THIS FOR THE SOLUTION 2 
+https://www.geeksforgeeks.org/chocolate-distribution-problem-set-2/
+
 
 class Solution {
 public:
