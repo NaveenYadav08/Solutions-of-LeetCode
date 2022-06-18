@@ -7,7 +7,7 @@ class Solution {
         
         vector<int> ans(n);
         
-        priority_queue<int,vector<int>,greater<int>> pq;
+        priority_queue<int,vector<int>,greater<int>> pq;  //largest  mae min heap
         
         for(int i=0; i<n; i++)
         {
