@@ -40,7 +40,7 @@ class Solution {
     
     int candy(vector<int>& ratings) {
         if(ratings.size() <= 1) return ratings.size();
-        int candies = 0;
+        int candies = 1;
         int up = 0, down = 0; 
         int prevSlope = 0;
         
@@ -51,7 +51,7 @@ int currSlope = (ratings[i] > ratings[i-1]) ? 1  : (ratings[i] < ratings[i-1] ? 
             //If mountain is changing. \_ || \/ ||  /
             if((prevSlope < 0 && currSlope >= 0) || (prevSlope > 0 && currSlope == 0)) {  
                 candies = candies + sum(up) + sum(down) + max(up, down);
-                 cout<<i<<" DD "<<up<<" "<<down<<endl;
+                //cout<<i<<" DD "<<up<<" "<<down<<endl;
                 up = 0; 
                 down = 0;
               
@@ -72,7 +72,7 @@ int currSlope = (ratings[i] > ratings[i-1]) ? 1  : (ratings[i] < ratings[i-1] ? 
             prevSlope = currSlope;
         } 
         
-        candies = candies + sum(up) + sum(down) + max(up, down) + 1;
+        candies = candies + sum(up) + sum(down) + max(up, down);
         return candies;
     }
     
