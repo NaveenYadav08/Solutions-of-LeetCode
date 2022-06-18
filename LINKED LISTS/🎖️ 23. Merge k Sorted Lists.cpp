@@ -1,5 +1,5 @@
 // https://leetcode.com/problems/merge-k-sorted-lists/
-/// 
+/// https://practice.geeksforgeeks.org/problems/merge-k-sorted-linked-lists/1
 
 class Solution {
 public:
