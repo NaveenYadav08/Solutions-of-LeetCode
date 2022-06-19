@@ -36,6 +36,7 @@ public:
     void follow(int followerId, int followeeId) {
         follows[followerId].insert(followeeId);
     }
+    // The user with ID followerId started following the user with ID followeeId
     
     void unfollow(int followerId, int followeeId) {
         follows[followerId].erase(followeeId);
