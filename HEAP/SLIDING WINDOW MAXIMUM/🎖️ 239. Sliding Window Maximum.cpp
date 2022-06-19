@@ -20,7 +20,7 @@ Comment for any doubt.
 
 class Solution {
 public:
-    // dec queue
+    
 vector<int> maxSlidingWindow(vector<int>& nums, int k) {
     
 int n=nums.size();
@@ -29,9 +29,9 @@ vector<int> ans;
 
     for(int i=0;i<n;i++)
     {
-        while(!dq.empty() && dq.front()==i-k)
+        while(!dq.empty() && i-dq.front()>=k)
         {
-            dq.pop_front();
+            dq.pop_front(); // win size k
         }
         
         while(!dq.empty() && nums[dq.back()]<=nums[i])
