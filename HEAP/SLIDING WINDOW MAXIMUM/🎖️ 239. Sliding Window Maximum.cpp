@@ -20,7 +20,7 @@ Comment for any doubt.
 
 class Solution {
 public:
-    
+    // dec queue
 vector<int> maxSlidingWindow(vector<int>& nums, int k) {
     
 int n=nums.size();
