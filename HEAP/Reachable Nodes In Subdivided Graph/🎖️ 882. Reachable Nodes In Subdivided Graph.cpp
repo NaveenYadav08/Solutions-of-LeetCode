@@ -1,5 +1,7 @@
 https://leetcode.com/problems/reachable-nodes-in-subdivided-graph/
 
+https://www.youtube.com/watch?v=-o4cZskb9Tc&t=621s
+
 class Solution {
         public:
         int reachableNodes(vector<vector<int>> edges, int maxMoves, int n) {
