@@ -19,7 +19,7 @@ class Solution {
         vector<bool> visited(n);
         // Comparator on the basis of max moves possible
         priority_queue<vector<int>> pq;
-        pq.push({maxMoves,0});
+        pq.push({maxMoves,0}); // kitne move aage ja skta hu from this node
 
         while (!pq.empty()) {
             vector<int> nearestEl = pq.top(); pq.pop();
