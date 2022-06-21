@@ -15,8 +15,8 @@ public:
     if(r1>=arr.size() || c1 >=arr[0].size() || r2>=arr.size() || c2 >=arr[0].size() || 
         arr[r1][c1]==-1 || arr[r2][c2]==-1)  return INT_MIN;
         
-        // when any one reaches destination then also only one cherry will be counted
-         if(r1==arr.size()-1 && c1==arr.size()-1) return arr[r1][c1];
+        
+if(r1==arr.size()-1 && c1==arr.size()-1 && r2==arr.size()-1 && c2==arr.size()-1) return arr[r1][c1];
                
         if(dp[r1][c1][r2][c2]!=-1) return dp[r1][c1][r2][c2];
         int cherries=0;
