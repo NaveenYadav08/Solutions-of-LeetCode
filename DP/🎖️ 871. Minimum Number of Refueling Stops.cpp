@@ -1,5 +1,33 @@
 https://leetcode.com/problems/minimum-number-of-refueling-stops/
 
+ https://youtu.be/4RgqAQFr9WQ?t=75
+
+DP solution-
+For input :
+120
+10
+[[10,60],[20,20],[30,30],[60,40]]
+
+Filling of DP - 
+// i 
+// dp array
+0
+10   70   0   0   0   
+1
+10   70   90   0   0   
+10   70   90   0   0   
+2
+10   70   90   120   0   
+10   70   100   120   0   
+10   70   100   120   0   
+3
+10   70   100   120   160   
+10   70   100   140   160   
+10   70   110   140   160   
+10   70   110   140   160   
+
+
+
 
 class Solution {
 public:
