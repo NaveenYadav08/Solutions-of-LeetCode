@@ -45,7 +45,7 @@ public:
 				dis += mx;
 				ans++;
 			}
-			if (dis < x) return -1;
+			if (dis < x and pq.empty()) return -1;
 			pq.push(fuel);
 		}
 		while (dis < target && !pq.empty()) {
