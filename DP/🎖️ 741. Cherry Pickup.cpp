@@ -38,7 +38,7 @@ public:
     }
     
     int cherryPickup(vector<vector<int>>& arr) {
-        if(arr.size()==1 && arr[0][0]==1) return 1;
+        if(arr[0].size()==1 && arr[0][0]==1) return 1;
          // int maxi=0;
         // solve(0,0,arr,0,maxi);
         // return maxi;
