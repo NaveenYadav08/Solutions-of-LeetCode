@@ -1,3 +1,10 @@
+ALSO 
+(n+m)! / m! n!
+it is use in https://practice.geeksforgeeks.org/problems/number-of-paths0926/1#
+formula
+
+
+
 https://leetcode.com/problems/path-with-maximum-gold/
 
 
