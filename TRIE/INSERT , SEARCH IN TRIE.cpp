@@ -49,6 +49,14 @@ startsWith: Check if the word inserted previously has the prefix “prefix” or
 It is similar to a search operation. Start from the root of the trie and traverse through the “prefix”.
 If the reference trie for a character is not present return false else transverse to the reference trie.Once the “prefix’ is traversed completely character by character return true.
 
+	
+	
+During delete operation we delete the key in bottom up manner using recursion. The following are possible conditions when deleting key from trie, 
+
+Key may not be there in trie. Delete operation should not modify trie.
+Key present as unique key (no part of key contains another key (prefix), nor the key itself is prefix of another key in trie). Delete all the nodes.
+Key is prefix key of another long key in trie. Unmark the leaf node.
+Key present in trie, having atleast one other key as prefix key. Delete nodes from end of key until first leaf node of longest prefix key.
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -59,150 +67,170 @@ If the reference trie for a character is not present return false else transvers
 ┃╰━╯┃╰━╯┣╯╰╯┃╰━━╮
 ╰━━━┻━━━┻━━━┻━━━╯
 
-// C++ implementation of search and insert
-// operations on Trie
+// Program for deleting nodes from trie
 #include <bits/stdc++.h>
 using namespace std;
 
-const int ALPHABET_SIZE = 26;
+const int numChar = 26;
 
-// trie node
-struct TrieNode
+// Trie node structure
+struct Trienode
 {
-	struct TrieNode *children[26];
-
-	// isEndOfWord is true if the node represents
-	// end of a word
-	bool isEndOfWord;
+	struct Trienode *child[numChar];
+	bool wordEnd;
 };
 
-// Returns new trie node (initialized to NULLs)
-struct TrieNode *getNode(void)
+/*
+    Function to create the node which returns new trieNode initialized 
+    to NULL
+*/
+struct Trienode* createNode(void)
 {
-	struct TrieNode *pNode = new TrieNode;
+	struct Trienode *newNode = new Trienode;
+	newNode->wordEnd = false;
 
-	pNode->isEndOfWord = false;
+	for (int i = 0; i < numChar; i++)
+		newNode->child[i] = NULL;
 
-	for (int i = 0; i < ALPHABET_SIZE; i++)
-		pNode->children[i] = NULL;
-
-	return pNode;
+	return newNode;
 }
 
-// If not present, inserts key into trie
-// If the key is prefix of trie node, just
-// marks leaf node
-void insert(struct TrieNode *root, string key)
+/*
+    If a node is not present, it will insert a word to the trie; if the 
+    word is a prefix of trie node, and it will just mark the leaf node
+*/
+void trieInsert(struct Trienode *root, string word)
 {
-	struct TrieNode *pCrawl = root;
+	struct Trienode *temp = root;
 
-	for (int i = 0; i < key.length(); i++)
+	for (int i = 0; i < word.length(); i++)
 	{
-		int index = key[i] - 'a';
-		if (!pCrawl->children[index])
-			pCrawl->children[index] = getNode();
+		int index = word[i] - 'a';
+		if (!temp->child[index])
+		{
+			// To create a new node
+			temp->child[index] = createNode();
+		}
 
-		pCrawl = pCrawl->children[index];
+		temp = temp->child[index];
 	}
 
-	// mark last node as leaf
-	pCrawl->isEndOfWord = true;
+	// Indicates the last node as leaf
+	temp->wordEnd = true;
 }
 
-// Returns true if key presents in trie, else
-// false
-bool search(struct TrieNode *root, string key)
+// Function for searching word in the trie and return true if present
+bool trieSearch(struct Trienode *root, string word)
 {
-	struct TrieNode *pCrawl = root;
+	struct Trienode *temp = root;
 
-	for (int i = 0; i < key.size(); i++)
+	for (int i = 0; i < word.length(); i++)
 	{
-		int index = key[i] - 'a';
-		if (!pCrawl->children[index])
+		int index = word[i] - 'a';
+		if (!temp->child[index])
+		{
 			return false;
+		}
 
-		pCrawl = pCrawl->children[index];
+		temp = temp->child[index];
 	}
 
-	return (pCrawl->isEndOfWord);
+	return (temp != NULL && temp->wordEnd);
 }
 
-
-
-// Returns true if root has no children, else false
-bool isEmpty(TrieNode* root)
+// Function to check if the root has any children or not.
+bool trieEmpty(Trienode *root)
 {
-    for (int i = 0; i < ALPHABET_SIZE; i++)
-        if (root->children[i])
-            return false;
-    return true;
-}
- 
-// Recursive function to delete a key from given Trie
-TrieNode* remove(TrieNode* root, string key, int depth = 0)
-{
-    // If tree is empty
-    if (!root)
-        return NULL;
- 
-    // If last character of key is being processed
-    if (depth == key.size()) {
- 
-        // This node is no more end of word after
-        // removal of given key
-        if (root->isEndOfWord)
-            root->isEndOfWord = false;
- 
-        // If given is not prefix of any other word
-        if (isEmpty(root)) {
-            delete (root);
-            root = NULL;
-        }
- 
-        return root;
-    }
- 
-    // If not last character, recur for the child
-    // obtained using ASCII value
-    int index = key[depth] - 'a';
-    root->children[index] =
-          remove(root->children[index], key, depth + 1);
- 
-    // If root does not have any child (its only child got
-    // deleted), and it is not end of another word.
-    if (isEmpty(root) && root->isEndOfWord == false) {
-        delete (root);
-        root = NULL;
-    }
- 
-    return root;
+	for (int i = 0; i < numChar; i++)
+	{
+		if (root->child[i])
+		{
+			return false;
+		}
+	}
+
+	return true;
 }
 
-// Driver
+// Function having a recursive call to delete a word from the Trie given
+Trienode* trieDelete(Trienode *root, string word, int height = 0)
+{
+	// Condition if the tree is empty
+	if (!root)
+	{
+		return NULL;
+	}
+
+	// The final character of the word is being handled
+	if (height == word.size())
+	{
+		/*
+		    After removal of the given word/key, the last node is 
+		    not the end of the word
+		*/
+		if (root->wordEnd)
+		{
+			root->wordEnd = false;
+		}
+
+		// In case if the given word isn't prefix of any other word
+		if (trieEmpty(root))
+		{
+			delete(root);
+			root = NULL;
+		}
+
+		return root;
+	}
+
+	/*
+	    In case it is not the last character, repeat for the child using 
+	    ASCII value
+	*/
+	int index = word[height] - 'a';
+	root->child[index] = trieDelete(root->child[index], word, height + 1);
+
+	/*
+	    In case the root does not have any child(its only child gets 
+	    removed), then it is not the same for another word. The another 
+	    word does not end here.
+	*/
+	if (trieEmpty(root) && root->wordEnd == false)
+	{
+		// Node deleted
+		delete(root);
+		root = NULL;
+	}
+
+	return root;
+}
+
 int main()
 {
-	// Input keys (use only 'a' through 'z'
-	// and lower case)
-	string keys[] = {"the", "a", "there",
-					"answer", "any", "by",
-					"bye", "their" };
-	int n = sizeof(keys)/sizeof(keys[0]);
+	string word[] = { "coding", "ninja", "play", "join", "us", "have",
+		"fun" };
+	int size = sizeof(word) / sizeof(word[0]);
+	struct Trienode *root = createNode();
 
-	struct TrieNode *root = getNode();
+	// To construct the nodes in the trie
+	for (int i = 0; i < size; i++)
+	{
+		trieInsert(root, word[i]);
+	}
 
-	// Construct trie
-	for (int i = 0; i < n; i++)
-		insert(root, keys[i]);
+	// To search for a word in the trie inputted
+	trieSearch(root, "coding") ? cout << "Yes, it is present!\n" : cout <<
+		"No, it is not present!\n";
 
-	// Search for different keys
-	search(root, "the")? cout << "Yes\n" :
-						cout << "No\n";
-	search(root, "these")? cout << "Yes\n" :
-						cout << "No\n";
-	search(root, "their")? cout << "Yes\n" :
-						cout << "No\n";
-	search(root, "thaw")? cout << "Yes\n" :
-						cout << "No\n";
+	trieSearch(root, "ninja") ? cout << "Yes, it is present!\n" : cout <<
+		"No, it is not present!\n";
+
+	// To delete a word in the trie
+	trieDelete(root, "play");
+
+	// To search the word deleted
+	trieSearch(root, "playground") ? cout << "Yes, it is present!\n" : cout <<
+		"No, it is not present!\n";
 	return 0;
 }
 
