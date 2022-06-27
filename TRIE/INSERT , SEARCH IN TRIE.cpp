@@ -59,106 +59,99 @@ If the reference trie for a character is not present return false else transvers
 ┃╰━╯┃╰━╯┣╯╰╯┃╰━━╮
 ╰━━━┻━━━┻━━━┻━━━╯
 
-#include<bits/stdc++.h>
+// C++ implementation of search and insert
+// operations on Trie
+#include <bits/stdc++.h>
 using namespace std;
-#define IOS ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-#define endl "\n"
-#define MAXN 100001
-#define INF 1e18+1
-struct Node {
-	Node *links[26];
-	bool flag = false;
-	//checks if the reference trie is present or not
-	bool containKey(char ch) {
-		return (links[ch - 'a'] != NULL);
-	}
-	//creating reference trie
-	void put(char ch, Node *node) {
-		links[ch - 'a'] = node;
-	}
-	//to get the next node for traversal
-	Node *get(char ch) {
-		return links[ch - 'a'];
-	}
-	//setting flag to true at the end of the word
-	void setEnd() {
-		flag = true;
-	}
-	//checking if the word is completed or not
-	bool isEnd() {
-		return flag;
-	}
-};
-class Trie {
-private:
-	Node* root;
-public:
-	Trie() {
-		//creating new obejct
-		root = new Node();
-	}
 
-	void insert(string word) {
-		//initializing dummy node pointing to root initially
-		Node *node = root;
-		for (int i = 0; i < word.size(); i++) {
-			if (!node->containKey(word[i])) {
-				node->put(word[i], new Node());
-			}
-			//moves to reference trie
-			node = node->get(word[i]);
-		}
-		node->setEnd();
-	}
+const int ALPHABET_SIZE = 26;
 
-	bool search(string word) {
-		Node *node = root;
-		for (int i = 0; i < word.size(); i++) {
-			if (!node->containKey(word[i])) {
-				return false;
-			}
-			node = node->get(word[i]);
-		}
-		return node->isEnd();
-	}
+// trie node
+struct TrieNode
+{
+	struct TrieNode *children[26];
 
-	bool startsWith(string prefix) {
-		Node* node = root;
-		for (int i = 0; i < prefix.size(); i++) {
-			if (!node->containKey(prefix[i])) {
-				return false;
-			}
-			node = node->get(prefix[i]);
-		}
-		return true;
-	}
+	// isEndOfWord is true if the node represents
+	// end of a word
+	bool isEndOfWord;
 };
 
+// Returns new trie node (initialized to NULLs)
+struct TrieNode *getNode(void)
+{
+	struct TrieNode *pNode = new TrieNode;
+
+	pNode->isEndOfWord = false;
+
+	for (int i = 0; i < ALPHABET_SIZE; i++)
+		pNode->children[i] = NULL;
+
+	return pNode;
+}
+
+// If not present, inserts key into trie
+// If the key is prefix of trie node, just
+// marks leaf node
+void insert(struct TrieNode *root, string key)
+{
+	struct TrieNode *pCrawl = root;
+
+	for (int i = 0; i < key.length(); i++)
+	{
+		int index = key[i] - 'a';
+		if (!pCrawl->children[index])
+			pCrawl->children[index] = getNode();
+
+		pCrawl = pCrawl->children[index];
+	}
+
+	// mark last node as leaf
+	pCrawl->isEndOfWord = true;
+}
+
+// Returns true if key presents in trie, else
+// false
+bool search(struct TrieNode *root, string key)
+{
+	struct TrieNode *pCrawl = root;
+
+	for (int i = 0; i < key.size(); i++)
+	{
+		int index = key[i] - 'a';
+		if (!pCrawl->children[index])
+			return false;
+
+		pCrawl = pCrawl->children[index];
+	}
+
+	return (pCrawl->isEndOfWord);
+}
+
+// Driver
 int main()
 {
-	int n = 5;
-	vector<int>type = {1, 1, 2, 3, 2};
-	vector<string>value = {"hello", "help", "help", "hel", "hel"};
-	Trie trie;
-	for (int i = 0; i < n; i++) {
-		if (type[i] == 1) {
-			trie.insert(value[i]);
-		}
-		else if (type[i] == 2) {
-			if (trie.search(value[i])) {
-				cout << "true" << "\n";
-			}
-			else {
-				cout << "false" << "\n";
-			}
-		}
-		else {
-			if (trie.startsWith(value[i])) {
-				cout << "true" << "\n";
-			}
-			else {
-				cout << "false" << "\n";
-			}
-		}
-	}
+	// Input keys (use only 'a' through 'z'
+	// and lower case)
+	string keys[] = {"the", "a", "there",
+					"answer", "any", "by",
+					"bye", "their" };
+	int n = sizeof(keys)/sizeof(keys[0]);
+
+	struct TrieNode *root = getNode();
+
+	// Construct trie
+	for (int i = 0; i < n; i++)
+		insert(root, keys[i]);
+
+	// Search for different keys
+	search(root, "the")? cout << "Yes\n" :
+						cout << "No\n";
+	search(root, "these")? cout << "Yes\n" :
+						cout << "No\n";
+	search(root, "their")? cout << "Yes\n" :
+						cout << "No\n";
+	search(root, "thaw")? cout << "Yes\n" :
+						cout << "No\n";
+	return 0;
 }
+
