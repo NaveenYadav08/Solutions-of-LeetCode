@@ -1,49 +1,40 @@
 https://leetcode.com/problems/permutations-ii/
 
 class Solution {
-public:
+  public:
+ 
 
-    
-    bool CHECK(vector<int> nums, int start, int curr)
-    {
-        for(int i=start; i<curr; i++)
-        {
-            if(nums[i]==nums[curr]) return false;
-        }
-        return true;
-    }
-    
-    void helper(vector<int> &nums, vector<vector<int>>& ans, int i)
-{
-    if(i==nums.size())
-    {
-        ans.push_back(nums);
-        return;
-    }
-    
-    if(i>nums.size()) return;
-    
-    for(int j=i; j<nums.size(); j++)
-    {   
-        if(!CHECK(nums,i,j)) continue;
-        else{
-        swap(nums[i], nums[j]);
-        helper(nums,ans, i+1);
-        swap(nums[i], nums[j]);
-        }
-    }
-}
-    
-    vector<vector<int>> permuteUnique(vector<int>& nums) {
-        
+  
+  void helper(vector<int>& S, vector<vector<int>>& ans, int i, int n)
+	{
+	    if(i==n)
+	    {
+	        ans.push_back(S);
+	        //cout<<S<<"  print"<<endl;
+	        return;
+	    }
+	    if(i>n)
+	    return;
+	    
+	    unordered_set<int> s;
+	    for(int k=i;k<n;k++)
+	    {
+	       if(s.find(S[k])!=s.end())
+	        continue;
+	        s.insert(S[k]);
+	        swap(S[i],S[k]);
+	        helper(S,ans,i+1,n);
+	        swap(S[i],S[k]);
+	    }
+	}
+  
+    vector<vector<int>> uniquePerms(vector<int> S ,int n) {
+        // code here
         vector<vector<int>> ans;
-        sort(nums.begin(), nums.end());
-        
-        helper(nums, ans, 0);
+         helper(S,ans,0,S.size());
+         sort(ans.begin(),ans.end());
         return ans;
-        
     }
-    
 };
 
 
