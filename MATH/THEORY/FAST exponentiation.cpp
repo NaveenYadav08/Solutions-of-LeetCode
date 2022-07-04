@@ -11,11 +11,14 @@ public:
             n = abs(n);
             x = 1/x;
         }
+        
+        double subprob = myPow(x,n/2);
+        
         if(n%2==0){
-            return myPow(x*x,n/2); // x^2 ki power n/2
+            return subprob * subprob; // x^2 ki power n/2
         
         }else{
-            return x*myPow(x*x,n/2);
+            return x* subprob * subprob;
         }
     }
 };
