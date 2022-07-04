@@ -18,3 +18,10 @@ Catalan numbers are a sequence of natural numbers that occurs in many interestin
 The first few Catalan numbers for n = 0, 1, 2, 3, … are 1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, …  
 
 
+
+# INCLUSION EXCLUSION PRINCIPLE 
+|A∪B| = |A| + |B| - |A∩B|.
+|A∪B∪C| = |A| + |B| + |C| - |A∩B| - |B∩C| - |A∩C| + |A∩B∩C|
+so for AUBUCUD = + with singles   - with doubles  + with triples - with quadsd 
+see pic 
+
