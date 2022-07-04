@@ -60,3 +60,53 @@ class Solution
         return solve(n,k);
     }
 };
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////
+
+
+OPtiimized binary searh Dp 
+
+int dp[102][10002];
+
+class Solution {
+public:
+    int BSsolve(int e,int f){
+        if(f==1 || f==0)
+            return f;
+        if(e==1)
+            return f;
+
+        if(dp[e][f]!=-1)
+            return dp[e][f];
+
+        int minn=INT_MAX;
+        int l=1, r=f;
+        
+        while(l<=r){
+            int k=l+(r-l)/2; // k mid
+            int Lval=BSsolve(e-1,k-1); // broken at mid
+            int Rval=BSsolve(e,f-k); // not broken at mid
+
+            if(Lval<=Rval)
+                l=k+1;
+            else
+                r=k-1;
+
+            int temp=1+max(Lval,Rval);
+            minn=min(minn,temp);
+        }
+
+        return dp[e][f]=minn;
+    }
+    
+    int superEggDrop(int e, int f) {
+        memset(dp,-1,sizeof(dp));
+	    return BSsolve(e,f);
+    }
+};
