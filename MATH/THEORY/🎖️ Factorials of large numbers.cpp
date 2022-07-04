@@ -18,7 +18,7 @@ public:
         int carry = 0;
         for (int i = 0; i < number.size(); i++) {
             int num = n * number[i];
-            number[i] = (char)((num + carry) % 10);
+            number[i] = (num + carry) % 10;
             carry = (num + carry) / 10;
         }
         while (carry) {
