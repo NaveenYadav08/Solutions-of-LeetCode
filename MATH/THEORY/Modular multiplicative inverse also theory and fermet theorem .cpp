@@ -81,6 +81,8 @@ a^(-1) ≅ a^ (m-2) (mod m)
   Time Complexity: O(log m)
     
     
+   
+    
     CODE 
 // To find GCD of a and b
 int gcd(int a, int b);
@@ -105,15 +107,18 @@ void modInverse(int a, int m)
 }
  
 // To compute x^y under modulo m
-int power(int x, unsigned int y, unsigned int m)
+int power(int a, unsigned int b, unsigned int m)
 {
-    if (y == 0)
-        return 1;
-    int p = power(x, y / 2, m) % m;
-    p = (p * p) % m;
- 
-    return (y % 2 == 0) ? p : (x * p) % m;
+    if(b == 0) return 1;
+    a = a % m;
+    int temp = power(a, b/2, m);
+    if(b&1)
+        return (((temp * temp) % m) * a) % m;
+    else
+        return (temp * temp) % m;
 }
+
+
  
 // Function to return gcd of a and b
 int gcd(int a, int b)
