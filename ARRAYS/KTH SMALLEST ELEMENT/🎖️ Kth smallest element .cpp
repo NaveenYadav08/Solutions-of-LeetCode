@@ -19,13 +19,16 @@ class Solution{
         swap(&arr[l + pivot], &arr[r]);
         return partition(arr, l, r);
     }
+    
+    
+    // l=0,  r= (n-1) initially
     int kthSmallest(int arr[], int l, int r, int k)
     {
         // If k is smaller than number of elements in array
         if (k > 0 && k <= r - l + 1)
         {
             // find a position for random partition
-            int pos = randomPartition(arr, l, r);
+            int pos = randomPartition(arr, l, r); // pos is returned wrt 0 index
             
             // if this pos gives the kth smallest element, then return
             if (pos-l == k-1)
