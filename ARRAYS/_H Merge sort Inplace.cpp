@@ -27,8 +27,7 @@ void swap(int nums[], int i, int j)
 // Merging the subarrays using shell sorting
 // Time Complexity: O(nlog n)
 // Space Complexity: O(1)
-void inPlaceMerge(int nums[], int start,
-							int end)
+void inPlaceMerge(int nums[], int start,int end)
 {
 	int gap = end - start + 1;
 	
