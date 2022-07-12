@@ -28,7 +28,7 @@ class Solution{
         if (k > 0 && k <= r - l + 1)
         {
             // find a position for random partition
-            int pos = randomPartition(arr, l, r); // pos is returned wrt 0 index
+            int pos = randomPartition(arr, l, r);  // pos is returned wrt 0 index && k is wrt 1 base index so pos - l == k - 1 comparision
             
             // if this pos gives the kth smallest element, then return
             if (pos-l == k-1)
