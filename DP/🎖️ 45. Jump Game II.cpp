@@ -8,7 +8,7 @@ class Solution {
 public:
     int jump(vector<int>& nums) {
         // linear time 
-        
+        int n=nums.size();
         int currReach = 0;
         int currMax = 0;
         int jumps = 0;
@@ -28,6 +28,8 @@ public:
             }
 
         }
+        if(currReach<n-1)
+        return -1;
         
         return jumps;
     }
