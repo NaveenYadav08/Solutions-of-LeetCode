@@ -18,6 +18,8 @@ we are referring the elements and 5 elements can be smaller than 6 also and 7 al
 If count<(r*c+1)/2 , we mark  min as mid+1 since curr element or elements before it cannot be the answer.
 If count>(r*c+1)/2 , we mark max as mid , since elements after this can only be the  answer now.
   
+ 
+ NO of elements less than or equl to x
   
   
   
