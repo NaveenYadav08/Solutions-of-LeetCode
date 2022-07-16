@@ -1,5 +1,6 @@
 https://www.codingninjas.com/codestudio/problems/word-wrap_982931?leftPanelTab=0
 
+TC = SC = O ( N^2 )
 
 
 
