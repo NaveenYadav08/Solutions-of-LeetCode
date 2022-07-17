@@ -15,7 +15,7 @@ public:
 string middleJustify(vector<string>& words,int diff, int i, int j)
 {
     
-    int spacesNeeded = j-i-1;
+    int spacesNeeded = j-i-1; // kitne words ke beech me spread krna hae
     int spaces = diff/spacesNeeded;
     int extraSpaces = diff%spacesNeeded;
     
