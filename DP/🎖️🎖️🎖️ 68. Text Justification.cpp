@@ -65,7 +65,7 @@ string leftJustify(vector<string>& words,int diff, int i, int j)
         {
           int j=i+1;
             int lineLength = words[i].size();
-            while(j<n && (lineLength + words[j].size() +(j-i-1))<maxWidth )
+            while(j<n && (lineLength + words[j].size() +(j-i))<=maxWidth )
             {
                 lineLength+= words[j].size();
                 ++j;
