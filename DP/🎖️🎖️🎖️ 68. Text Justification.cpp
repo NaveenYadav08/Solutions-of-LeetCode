@@ -71,7 +71,7 @@ string leftJustify(vector<string>& words,int diff, int i, int j)
                 ++j;
             }
             
-            int diff=maxWidth-lineLength;
+            int diff=maxWidth-lineLength; /// spaces to spread
             int numberOfWords = j-i;
             if(numberOfWords == 1 || j >= n)
                 result.push_back(leftJustify(words,diff,i,j));
