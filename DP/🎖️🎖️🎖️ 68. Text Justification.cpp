@@ -25,6 +25,7 @@ string middleJustify(vector<string>& words,int diff, int i, int j)
          
      for(int I=0;I<spacesToApply;I++)
         result+=" ";
+        
         result+=words[k];
         
     }
