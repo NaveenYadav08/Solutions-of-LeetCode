@@ -47,7 +47,9 @@ long long m = 1e9 + 7;
         if(dp[i][j] != -1) return dp[i][j];
         if(s[i] == s[j])
        {
-         return  dp[i][j] = ( 1 + cps(s,i+1,j) + cps(s,i,j-1))%m;
+         return  dp[i][j] = ( cps(s,i+1,j) + cps(s,i,j-1) - cps(s,i+1, j-1)   + cps(s,i+1, j-1) + 1 )%m;
+         // cps(s,i+1,j) + cps(s,i,j-1) - cps(s,i+1, j-1)  yae as normal
+         // cps(s,i+1, j-1) + 1 // this is common wale sare make palindrome with i,j and +1 for i ---- j
        }
        else
        {
