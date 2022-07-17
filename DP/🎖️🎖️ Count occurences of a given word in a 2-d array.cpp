@@ -2,42 +2,39 @@ https://practice.geeksforgeeks.org/problems/count-occurences-of-a-given-word-in-
 
 class Solution{
     public:
-int  solve(vector<vector<char>>&mat,string &target,int x,int y,int index,vector<vector<int>>&vis){
-       int n=mat.size();
-       int m=mat[0].size();
-      
-       if(x<0||x>=n||y<0||y>=m||mat[x][y]!=target[index]||vis[x][y]==1){
-           return 0;
-       }
-       if(index==target.size()-1){
-               return 1;
-       }
-       int ans=0;
-       vis[x][y]=1;
-       vector<int> dir={-1,0,1,0,-1};
-       for(int i=0;i<4;i++){
-           int newx=x+dir[i];
-           int newy=y+dir[i+1];
-           if(newx>=0&&newx<n&&newy>=0&&newy<m&&vis[newx][newy]==0){
-               ans+=solve(mat,target,newx,newy,index+1,vis);
-           }
-       }
-       vis[x][y]=0;
-       return ans;
-   }
-   
-   int findOccurrence(vector<vector<char> > &mat, string target){
-       int n=mat.size();
-       int m=mat[0].size();
-       int count=0;
-       vector<vector<int>> vis(n,vector<int>(m,0));
-       for(int i=0;i<n;i++){
-           for(int j=0;j<m;j++){
-               if(mat[i][j]==target[0]){
-                   count+=solve(mat,target,i,j,0,vis);
-               }
-           }
-       }
-       return count;
-   }
+    int findOccurrence(vector<vector<char> > &mat, string target){
+        int count = 0;
+        for(int i = 0; i < mat.size() ; i++){
+            for(int j = 0; j < mat[i].size(); j++){
+                count += findPath(mat, target, i, j, 0);
+            }
+        }
+        return count;
+    }
+    
+    int findPath(vector<vector<char> > mat, string target, int startX, int startY, int targetIndex){
+        
+        if(startX < 0 || startY < 0 || startX >= mat.size() || startY >= mat[startX].size()){
+            return 0;
+        }
+        
+        char original = mat[startX][startY];
+        
+        if(original != target[targetIndex])
+            return 0;
+        
+        if(targetIndex == target.size() - 1)
+            return 1;
+
+        int count = 0;
+        mat[startX][startY] = '\0';         // avoid return back to visited node
+
+        count += findPath(mat, target, startX+1, startY, targetIndex+1);
+        count += findPath(mat, target, startX, startY+1, targetIndex+1);
+        count += findPath(mat, target, startX-1, startY, targetIndex+1);
+        count += findPath(mat, target, startX, startY-1, targetIndex+1);
+        
+        mat[startX][startY] = original;
+        return count;
+    }
 };
