@@ -6,61 +6,61 @@ code
 
 class Solution {
 public:
-	// This function searches in all 8-direction from point
-	// (row, col) in grid[][]
-	bool search2D(vector<vector<char>> grid, int row, int col, string word, vector<int>x, vector<int>y)
-	{
-		int R = grid.size();
-		int C = grid[0].size();
-	    // If first character of word doesn't match with
-	    // given starting point in grid.
-	    if (grid[row][col] != word[0])
-	      return false;
-	 
-	    int len = word.size();
-	 
-	    // Search word in all 8 directions starting from (row,col)
-	    for (int dir = 0; dir < 8; dir++)
-	    {
-	        // Initialize starting point for current direction
-	        int k, rd = row + x[dir], cd = col + y[dir];
-	 
-	        // First character is already checked, match remaining
-	        // characters
-	        for (k = 1; k < len; k++)
-	        {
-	            // If out of bound break
-	            if (rd >= R || rd < 0 || cd >= C || cd < 0)
-	                break;
-	 
-	            // If not matched,  break
-	            if (grid[rd][cd] != word[k])
-	                break;
-	 
-	            //  Moving in particular direction
-	            rd += x[dir], cd += y[dir];
-	        }
-	 
-	        // If all character matched, then value of must
-	        // be equal to length of word
-	        if (k == len)
-	            return true;
-	    }
-	    return false;
-	}
+	bool search(vector<vector<char>>grid,int i,int j,int idx,string word,string dir){
+        if(i<0 || j<0 || i>=grid.size() || j>=grid[0].size()|| grid[i][j]!=word[idx])
+          return false;
+          if(idx==word.size()-1)
+          return true;
+    
+          bool found=false;
+          if(dir=="n")
+          found=search(grid,i-1,j,idx+1,word,"n");
+          
+          else if(dir=="s")
+          found=search(grid,i+1,j,idx+1,word,"s");
+          
+          else if(dir=="e")
+          found=search(grid,i,j+1,idx+1,word,"e");
+          
+          else if(dir=="w")
+          found=search(grid,i,j-1,idx+1,word,"w");
+          
+          else if(dir=="ne")
+          found=search(grid,i-1,j+1,idx+1,word,"ne");
+          
+          else if(dir=="nw")
+          found=search(grid,i-1,j-1,idx+1,word,"nw");
+          
+          else if(dir=="se")
+          found=search(grid,i+1,j+1,idx+1,word,"se");
+          
+          else if(dir=="sw")
+          found=search(grid,i+1,j-1,idx+1,word,"sw");
+          
+          return found;
+    }
 	vector<vector<int>>searchWord(vector<vector<char>>grid, string word){
-		int row = grid.size();
-		int col = grid[0].size();
-		vector<int>x = { -1, -1, -1, 0, 0, 1, 1, 1 };
-		vector<int>y = { -1, 0, 1, -1, 1, -1, 0, 1 };
-		vector<vector<int>>ans;
-		for(int i = 0; i < row; i++){
-			for(int j = 0; j < col; j++){
-				if(search2D(grid, i, j, word, x, y)){
-					ans.push_back({i, j});
-				}
-			}
-		}
-		return ans;
+	    // Code here
+	    vector<vector<int>>ans;
+	    for(int i=0;i<grid.size();i++){
+	        for(int j=0;j<grid[0].size();j++){
+	            bool flag=false;
+	            if(grid[i][j]==word[0]){
+	                bool n= search(grid,i,j,0,word,"n");    //north
+	                bool s= search(grid,i,j,0,word,"s");    //south
+	                bool e= search(grid,i,j,0,word,"e");    //east
+	                bool w= search(grid,i,j,0,word,"w");    //west
+	                bool ne= search(grid,i,j,0,word,"ne");  //north-east
+	                bool nw= search(grid,i,j,0,word,"nw");  //north-west
+	                bool se= search(grid,i,j,0,word,"se");  //south-east
+	                bool sw= search(grid,i,j,0,word,"sw");  //south-west
+	                if(n||s||e||w||ne||nw||se||sw){
+	                  ans.push_back({i,j});
+	                }
+	            }
+	        }
+	    }
+	     return ans;
 	}
+
 };
