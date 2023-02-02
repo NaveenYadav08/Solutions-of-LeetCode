@@ -1,0 +1,6 @@
+for first node of even list fast->next !=NULL and fast->next->next!=NULL;
+
+and 
+
+for 2nd mid one in even list 
+fast!=NULL and fast->next!=NULL
