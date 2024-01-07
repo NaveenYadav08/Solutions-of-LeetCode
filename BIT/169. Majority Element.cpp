@@ -1,6 +1,6 @@
 // link  https://leetcode.com/problems/majority-element/
 
-
+// MOORE VOTING ALGO
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
