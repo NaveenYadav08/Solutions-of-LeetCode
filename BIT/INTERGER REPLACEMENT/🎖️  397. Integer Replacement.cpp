@@ -31,3 +31,19 @@ If number is odd
     
 ALTHOUGH 3 is exeptional because in bit representaion it is 00....011(2nd rightmost bit is one), but total number to make 3->1 increases if we add 1. So, we handle this case seprately
 */
+
+
+class Solution {
+public:
+int integerReplacement(int x) {
+        long long n = x;
+        int ans =0;
+        while(n>1){ 
+            if(n%2 ==0 ) n = n/2;
+       else if(n==3) { ans+=2; break;}
+else if(n&2) n++;
+else n--; ans++;
+        }
+return ans;
+    }
+};
