@@ -66,3 +66,39 @@ public:
         return ans;
     }
 };
+
+
+
+APPROACH 2 
+
+class Solution {
+public:
+    int maskWord(string word) {
+        int mask = 0;
+        for (auto c : word) mask |= (1 << c-'a');
+        return mask;
+    }
+    
+      vector<int> findNumOfValidWords(vector<string>& words, vector<string>& puzzles) {
+        unordered_map<int, int> mask_freq;
+        for (auto word : words) mask_freq[(maskWord(word))]++; // storing the bitmask frq of all the words from the word array
+
+        vector<int> res;        
+        for (auto p : puzzles) {
+            int mask = maskWord(p), submask = mask, first = (1 << p[0]-'a'), curr = 0;
+            // masking the puzzle wrd
+            // first word of puzzle mask
+            //  curr is ans of current puzzle word
+
+            
+            while (submask) {
+                if (submask & first) curr += mask_freq[submask];
+                submask = (submask-1) & mask;
+                 // this will do that it will count the rightmost set bit and usko negate kre ja rha hae mtlb ki yae rightmostset bit lia usko check kia yani us char ko aur phir usko zero krdia or usse agle setbit ki aur chl dia 
+            }
+            
+            res.push_back(curr);
+        }
+        return res;
+    }
+};
