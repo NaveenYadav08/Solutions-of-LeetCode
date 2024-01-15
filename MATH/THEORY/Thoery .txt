@@ -29,3 +29,10 @@ see pic
 
 #  The pigeonhole principle states that if we must put N + 1 or more pigeons into N Pigeon Holes, 
 then some pigeonholes must contain two or more pigeons
+
+
+Recursion used in 
+1 number of ways to place the brick
+2 number of boolean strings of len N with non consecustive ones
+3 numebr of ways of climbing the ladder
+
