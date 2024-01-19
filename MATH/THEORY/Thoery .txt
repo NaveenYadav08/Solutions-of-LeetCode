@@ -22,6 +22,9 @@ The first few Catalan numbers for n = 0, 1, 2, 3, … are 1, 1, 2, 5, 14, 42, 13
 # INCLUSION EXCLUSION PRINCIPLE 
 |A∪B| = |A| + |B| - |A∩B|.
 |A∪B∪C| = |A| + |B| + |C| - |A∩B| - |B∩C| - |A∩C| + |A∩B∩C|
+
+Number divisible by x from 1 to n = floor(n/x)
+
 so for AUBUCUD = + with singles   - with doubles  + with triples - with quadsd 
 see pic 
 
