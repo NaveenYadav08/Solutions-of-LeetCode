@@ -1,5 +1,5 @@
 // LINK https://www.interviewbit.com/problems/find-duplicate-in-array/
-
+// Image is also added also see that
 array is read only do it in O ( 1 ) space and O ( n ) time 
 
 // I will use turtle , rabbbit method 
