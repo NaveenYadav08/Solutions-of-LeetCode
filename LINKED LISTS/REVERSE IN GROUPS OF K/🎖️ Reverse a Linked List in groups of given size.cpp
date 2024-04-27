@@ -1,7 +1,5 @@
 // IT HAS 2 TYPES 
 
-
-
 1 /// rev the left outs too   https://practice.geeksforgeeks.org/problems/reverse-a-linked-list-in-groups-of-given-size/1
   
   2 /// leave the left outs   https://leetcode.com/problems/reverse-nodes-in-k-group/
