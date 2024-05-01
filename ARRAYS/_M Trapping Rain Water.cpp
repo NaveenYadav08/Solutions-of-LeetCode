@@ -1,5 +1,5 @@
 GFG - https://practice.geeksforgeeks.org/problems/trapping-rain-water-1587115621/1#
-
+// intution is i am moving left only if i make sure there is right greater than l and vice versea.
 CODE -
 o( 1 ) space complexiity 
 
