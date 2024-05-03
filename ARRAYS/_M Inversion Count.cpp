@@ -66,9 +66,10 @@ class Solution{
     //Function to mergesort the array, which uses divide and conquer algorithm
     //on left and right halves of array for mergesort operation.
     void mergeSort(long long a[], long long p, long long r)
-    {
-        if(p < r)
-        {
+    {   
+        if(p>=r) return;
+        
+        
             long long q = (p+r)/2;
             //Calling recursive function to sort left half of the array.
             mergeSort(a, p, q);
@@ -79,7 +80,7 @@ class Solution{
             //Calling merge function which sorts and merges both halves
             //of the array obtained after calling both recursive function.
             merge(a, p, q, r);
-        }
+        
     }
     
     //Function to count inversions in the array.
