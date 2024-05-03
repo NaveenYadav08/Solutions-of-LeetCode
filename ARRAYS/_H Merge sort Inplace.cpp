@@ -1,7 +1,7 @@
 // WAY ALPHA //
     void mergeInPlace(vector<int>& nums,int start,int mid, int end) {
         int total_len = end - start +1;
-        int gap = total_len/2 + total_len%2;
+        int gap = total_len/2 + total_len%2; // ceil of ( total_len / 2 );
         while(gap>0) {
             int i = start, j = start + gap;
             while(j<=end) {
