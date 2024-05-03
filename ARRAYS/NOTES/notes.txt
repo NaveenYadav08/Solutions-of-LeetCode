@@ -1,3 +1,5 @@
-A stable sort algorithm is a sorting algorithm that maintains the relative order of equal elements in the input data. This means that if two elements have the same value, the algorithm will ensure that the one that appeared earlier in the input data will also appear earlier in the sorted output.
+A stable sort algorithm is a sorting algorithm that maintains the relative order of equal elements in the input data. 
+This means that if two elements have the same value, 
+the algorithm will ensure that the one that appeared earlier in the input data will also appear earlier in the sorted output.
 
 Merge sort is stable.
