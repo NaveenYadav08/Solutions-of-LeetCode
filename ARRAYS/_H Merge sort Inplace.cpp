@@ -3,14 +3,14 @@
         int total_len = end - start +1;
         int gap = total_len/2 + total_len%2; // ceil of ( total_len / 2 );
         while(gap>0) {
-            int i = start, j = start + gap;
+            int i = start, j = start + gap; // two pointers gap distance apart 
             while(j<=end) {
                 if(nums[i]>nums[j]) {
                     swap(nums[i], nums[j]);
                 }
                 i++,j++;
             }
-            gap = gap<=1 ? 0 : gap/2 + gap%2;
+            gap = gap<=1 ? 0 : gap/2 + gap%2; // it will move till gap >= 1
         }
     }
 
