@@ -1,4 +1,4 @@
-// WAY ALPHA //
+// WAY ALPHA - GAP METHOD //
 
 void merge(long long arr1[], long long arr2[], int n, int m) {
     // len of the imaginary single array:
