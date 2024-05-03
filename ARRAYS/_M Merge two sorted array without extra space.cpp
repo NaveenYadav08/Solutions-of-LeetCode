@@ -1,4 +1,5 @@
 // WAY ALPHA - GAP METHOD //
+// TC - O((n+m)*log(n+m)) //
 
 
 void swapIfGreater(long long arr1[], long long arr2[], int ind1, int ind2) {
