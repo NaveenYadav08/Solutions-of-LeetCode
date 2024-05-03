@@ -2,4 +2,4 @@ A stable sort algorithm is a sorting algorithm that maintains the relative order
 This means that if two elements have the same value, 
 the algorithm will ensure that the one that appeared earlier in the input data will also appear earlier in the sorted output.
 
-Merge sort is stable.
+Merge sort is stable and use for It is commonly used in applications that require efficient and stable sorting, such as in databases, file systems, and data processing.
