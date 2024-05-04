@@ -35,39 +35,24 @@
 
 TYPE 2 
   
- ListNode* reverseKGroup(ListNode* head, int k) {
-    
-int count=0;
-ListNode* temp=head;
-    
-while(temp!=NULL)
-{
-count++;
-temp=temp->next;
-}
-
-    ListNode* curr=head;
-    ListNode* prev=NULL;
-    ListNode* next;int cnt=0;
-    while(curr!=NULL && cnt<k)
-    {
-        next=curr->next;
-        curr->next=prev;
-        prev=curr;
-        curr=next;
-        cnt++;
+ 	ListNode* reverseKGroup(ListNode* head, int k) {
+        ListNode* cursor = head;
+        for(int i = 0; i < k; i++){
+            if(cursor == nullptr) return head;
+            cursor = cursor->next;
+        }
+        ListNode* curr = head;
+        ListNode* prev = nullptr;
+        ListNode* nxt = nullptr;
+        for(int i = 0; i < k; i++){
+            nxt = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = nxt;
+        }
+        head->next = reverseKGroup(curr, k);
+        return prev;
     }
-    
-    if(next!=NULL && (count-k)>=k)
-    {
-        head->next=reverseKGroup(curr,k);
-    }
-    else
-    {
-        head->next=curr;
-    }
-    return prev;
-}
   
   
   
