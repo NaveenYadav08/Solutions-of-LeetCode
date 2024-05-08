@@ -26,9 +26,9 @@ public:
 	}
     
     vector<vector<int>> permute(vector<int>& S) {
-        sort(S.begin(),S.end());
+         //sort(S.begin(),S.end());
         vector<vector<int>> ans;
-        helper(S,ans,0,S.size());
+         helper(S,ans,0,S.size());
         return ans;
         
     }
