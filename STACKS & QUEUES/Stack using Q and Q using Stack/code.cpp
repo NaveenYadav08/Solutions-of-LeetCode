@@ -6,7 +6,7 @@ https://leetcode.com/problems/implement-stack-using-queues/
 //using single queue
 class MyStack {
         queue<int>q1;
-public:
+ public:
     MyStack() {
 
     }
