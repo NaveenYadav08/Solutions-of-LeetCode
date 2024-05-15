@@ -92,7 +92,7 @@ public:
 class MyQueue {
     stack<int> s1;
     
-public:
+    public:
     MyQueue() {
         
     }
