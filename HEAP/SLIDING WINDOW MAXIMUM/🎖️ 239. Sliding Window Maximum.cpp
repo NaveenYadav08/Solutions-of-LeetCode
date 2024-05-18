@@ -18,6 +18,8 @@ Comment for any doubt.
     
     
 
+
+
 class Solution {
 public:
     
@@ -28,7 +30,7 @@ deque<int> dq;
 vector<int> ans;
 
     for(int i=0;i<n;i++)
-    {
+    { 
         while(!dq.empty() && i-dq.front()>=k)
         {
             dq.pop_front(); // win size k
@@ -36,7 +38,7 @@ vector<int> ans;
         
         while(!dq.empty() && nums[dq.back()]<=nums[i])
         {
-            dq.pop_back();
+            dq.pop_back(); //  maintain dec order   
         }
         
         dq.push_back(i);
