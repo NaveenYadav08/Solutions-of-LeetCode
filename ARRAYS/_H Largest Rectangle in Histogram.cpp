@@ -3,39 +3,26 @@ https://www.youtube.com/watch?v=jC_cWLy7jSI
 CODE - 
 
 class Solution {
-public:
-    int largestRectangleArea(vector<int>& hist ) {
-        
-        int n = hist.size();stack<int> s;
-        int max_area = 0;
-        int tp;
-        int awt;
-        int i=0;
-        while(i<n)
-        {
-           if(s.empty() or hist[s.top()]<=hist[i] )
-               s.push(i++);
-            else
-            {
-                tp = s.top();
-                s.pop();
-                awt = hist[tp]*(s.empty()?i:(i-s.top()-1));
-                max_area= max(max_area,awt);
-                
-            }
+  public:
+    int largestRectangleArea(vector < int > & histo) {
+      stack < int > st;
+      int maxA = 0;
+      int n = histo.size();
+
+      for (int i = 0; i <= n; i++) {
+        while (!st.empty() && (i == n || histo[st.top()] >= histo[i])) {
+          int height = histo[st.top()]; // find ans for element in stack
+          st.pop();
+          int width;
+          if (st.empty())
+            width = i;
+          else
+            width = i - st.top() - 1; // cur i the right lim and st.top is left limit
+          maxA = max(maxA, width * height);
         }
-        
-        while(s.empty()==false)
-        {
-             tp = s.top();
-                s.pop();
-                awt = hist[tp]*(s.empty()?i:(i-s.top()-1));
-                max_area= max(max_area,awt);
-                
-        }
-        
-        return max_area;
-        
-        
+        st.push(i);
+      }
+
+      return maxA;
     }
 };
