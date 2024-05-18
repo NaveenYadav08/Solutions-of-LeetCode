@@ -39,7 +39,6 @@ public:
        Node*nex=p->next;
        pre->next=nex;
        nex->prev=pre;
-       delete(p);
     }
 
     void addNode(Node*newnode){
@@ -62,15 +61,15 @@ public:
     }
     
     void put(int key, int value) {
-       if(m.find(key)!=m.end()){
-            Node*c=m[key];
-            deleteNode(c);
+       if(m.find(key)!=m.end()){ // exist
+            Node*c=m[key]; // mapped node
+            deleteNode(c); // delete c
             c->val=value;
             addNode(c);
             m[key]=head->next;
         }
-        else{
-            if(m.size()==size){
+        else{ // not exist
+            if(m.size()==size){ // size full
                 Node* prev=tail->prev;
                 deleteNode(prev);
                 Node*l=new Node(key,value);
@@ -78,8 +77,8 @@ public:
                 m.erase(prev->key);
                 m[key]=head->next;
             }
-            else{
-                 Node*l=new Node(key,value);
+            else{ 
+                Node*l=new Node(key,value);
                 addNode(l);
                 m[key]=head->next; 
             }
