@@ -1,9 +1,7 @@
 https://practice.geeksforgeeks.org/problems/rotten-oranges2536/1
+// 2 Approaches BFS - DFS
 
-
-
-
-
+// BFS
 class Solution 
 {
     public:
@@ -65,5 +63,48 @@ class Solution
         //returning the minimum time.
         if(ct==0) return res;
         return -1;
+    }
+};
+
+
+// DFS 
+class Solution {
+public:
+    int orangesRotting(vector<vector<int>>& grid) {
+        int r=grid.size();
+        int c=grid[0].size();
+        for(int i=0;i<r;i++){
+            for(int j=0;j<c;j++){
+                if(grid[i][j]==2){
+                    dfs(grid,i,j,r,c,0,true);
+                    
+                }
+            }
+        }
+        int ans=0;
+        for(int i=0;i<r;i++){
+            for(int j=0;j<c;j++){
+                if(grid[i][j]==1)
+                    return -1;
+                ans=max(abs(grid[i][j]),ans);
+            }
+        }
+        return ans;
+    }
+    void dfs(vector<vector<int>>&grid,int x, int y,int r, int c,int count,bool start){
+        if(x<0 || x>=r || y<0 || y>=c || grid[x][y]==0 || grid[x][y]<0 && -grid[x][y]<count )
+            return;
+ // If the condition were not there, the DFS might overwrite a cell that was 
+ // previously processed with a more optimal (shorter) path, leading to incorrect results.
+ // This ensures that each cell always holds the minimum time required to rot the orange there.
+        if(grid[x][y]==2 && !start)
+            return;
+            
+        grid[x][y]=-count; // marking the cells as negative of the count
+        
+        dfs(grid,x+1,y,r,c,count+1,false);
+        dfs(grid,x,y+1,r,c,count+1,false);
+        dfs(grid,x-1,y,r,c,count+1,false);
+        dfs(grid,x,y-1,r,c,count+1,false);
     }
 };
