@@ -243,6 +243,11 @@ void KMPSearch(char* pat, char* txt)
         else if (i < N && pat[j] != txt[i]) {
             // Do not match lps[0..lps[j-1]] characters,
             // they will match anyway
+		// I know that both substr in pattern and text match and lps[j-1] 
+		// part of both is same so let I move i to i - lps[j-1] // means finding another start in the substr
+		// and j move back to zero
+		// but in substr lps[j-1] is same from front and end so we can move out j to directly lps[j-1] and so that 
+		// our i is settle back to i 
             if (j != 0)
                 j = lps[j - 1];
             else
