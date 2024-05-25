@@ -255,7 +255,7 @@ void KMPSearch(char* pat, char* txt)
 void computeLPSArray(char* pat, int M, int* lps)
 {
     // length of the previous longest prefix suffix
-    int len = 0;
+    int len = 0; // length of the previous longest prefix suffix
   
     lps[0] = 0; // lps[0] is always 0
   
@@ -272,6 +272,9 @@ void computeLPSArray(char* pat, int M, int* lps)
             // This is tricky. Consider the example.
             // AAACAAAA and i = 7. The idea is similar
             // to search step.
+		// The LPS array up to the current len already provides information about the longest prefixes. 
+		// When there is a mismatch, we look at lps[len - 1], 
+		// which tells us the length of the next best candidate prefix that is also a suffix.
             if (len != 0) {
                 len = lps[len - 1];
   
