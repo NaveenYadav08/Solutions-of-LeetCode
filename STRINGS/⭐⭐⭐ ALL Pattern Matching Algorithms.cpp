@@ -120,8 +120,8 @@ void search(char pat[], char txt[], int q)
 	// Calculate the hash value of pattern and first
 	// window of text
 	for (i = 0; i < M; i++)
-	{
-		p = (d * p + pat[i]) % q; // recursion sae hash nikala p = 0 * d + txt 
+	{      // hash = d^0*s[0] + d^1*s[1] + d^2*s[2] ....
+ 		p = (d * p + pat[i]) % q; // recursion sae hash nikala p = 0 * d + txt 
                                     // p = txt * d + txt 1
                                     // p = d*(d*txt + txt1) + txt2
                 
