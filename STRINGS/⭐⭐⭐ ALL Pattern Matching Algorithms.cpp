@@ -319,3 +319,114 @@ int main()
 }
 
 
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+─██████████████████────██████████████─██████─────────██████████████─██████████████─████████████████───██████████─██████████████─██████──██████─██████──────────██████─
+─██░░░░░░░░░░░░░░██────██░░░░░░░░░░██─██░░██─────────██░░░░░░░░░░██─██░░░░░░░░░░██─██░░░░░░░░░░░░██───██░░░░░░██─██░░░░░░░░░░██─██░░██──██░░██─██░░██████████████░░██─
+─████████████░░░░██────██░░██████░░██─██░░██─────────██░░██████████─██░░██████░░██─██░░████████░░██───████░░████─██████░░██████─██░░██──██░░██─██░░░░░░░░░░░░░░░░░░██─
+─────────████░░████────██░░██──██░░██─██░░██─────────██░░██─────────██░░██──██░░██─██░░██────██░░██─────██░░██───────██░░██─────██░░██──██░░██─██░░██████░░██████░░██─
+───────████░░████──────██░░██████░░██─██░░██─────────██░░██─────────██░░██──██░░██─██░░████████░░██─────██░░██───────██░░██─────██░░██████░░██─██░░██──██░░██──██░░██─
+─────████░░████────────██░░░░░░░░░░██─██░░██─────────██░░██──██████─██░░██──██░░██─██░░░░░░░░░░░░██─────██░░██───────██░░██─────██░░░░░░░░░░██─██░░██──██░░██──██░░██─
+───████░░████──────────██░░██████░░██─██░░██─────────██░░██──██░░██─██░░██──██░░██─██░░██████░░████─────██░░██───────██░░██─────██░░██████░░██─██░░██──██████──██░░██─
+─████░░████────────────██░░██──██░░██─██░░██─────────██░░██──██░░██─██░░██──██░░██─██░░██──██░░██───────██░░██───────██░░██─────██░░██──██░░██─██░░██──────────██░░██─
+─██░░░░████████████────██░░██──██░░██─██░░██████████─██░░██████░░██─██░░██████░░██─██░░██──██░░██████─████░░████─────██░░██─────██░░██──██░░██─██░░██──────────██░░██─
+─██░░░░░░░░░░░░░░██────██░░██──██░░██─██░░░░░░░░░░██─██░░░░░░░░░░██─██░░░░░░░░░░██─██░░██──██░░░░░░██─██░░░░░░██─────██░░██─────██░░██──██░░██─██░░██──────────██░░██─
+─██████████████████────██████──██████─██████████████─██████████████─██████████████─██████──██████████─██████████─────██████─────██████──██████─██████──────────██████─
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+A Z-value for a position in the string tells you how many characters from that position match the beginning of the string.
+
+
+╭━━━┳━━━┳━━━┳━━━╮
+┃╭━╮┃╭━╮┣╮╭╮┃╭━━╯
+┃┃╱╰┫┃╱┃┃┃┃┃┃╰━━╮
+┃┃╱╭┫┃╱┃┃┃┃┃┃╭━━╯
+┃╰━╯┃╰━╯┣╯╰╯┃╰━━╮
+╰━━━┻━━━┻━━━┻━━━╯
+#include<iostream>
+using namespace std;
+
+
+void search(string text, string pattern)
+{
+	// Create concatenated string "P$T"
+	string concat = pattern + "$" + text;
+	int l = concat.length();
+
+	// Construct Z array
+	int Z[l];
+	getZarr(concat, Z);
+
+	// now looping through Z array for matching condition
+	for (int i = 0; i < l; ++i)
+	{
+		// if Z[i] (matched region) is equal to pattern
+		// length we got the pattern
+		if (Z[i] == pattern.length())
+			cout << "Pattern found at index "
+				<< i - pattern.length() -1 << endl;
+	}
+}
+
+// ⭐ The characters in str from index L to R match the characters from the beginning of str.
+// Fills Z array for given string str[]
+void getZarr(string str, int Z[])
+{
+	int n = str.length();
+	int L, R, k;
+
+	// [L,R] make a window which matches with prefix of s
+	L = R = 0;
+	for (int i = 1; i < n; ++i)
+	{
+		// If i is Outside the Current Window:
+		if (i > R)
+		{
+			L = R = i; // If i is outside the current window (i > R), we start a new window.
+
+	               // Expand the Window: While the characters match (str[R-L] == str[R]), increase R
+			while (R<n && str[R-L] == str[R])
+				R++;
+			Z[i] = R-L;
+			R--;
+		}
+		else
+		{       // Calculate k: k is the position relative to the start of the current window.
+			// k = i-L so k corresponds to number which matches in [L,R] interval.
+			k = i-L;
+
+			// if Z[k] is less than remaining interval
+			// then Z[i] will be equal to Z[k].
+			// For example, str = "ababab", i = 3, R = 5
+			// and L = 2
+			if (Z[k] < R-i+1)
+				Z[i] = Z[k];
+
+			// For example str = "aaaaaa" and i = 2, R is 5,
+			// L is 0
+			else
+			{
+				// else start from R and check manually
+				L = i;
+				while (R<n && str[R-L] == str[R])
+					R++;
+				Z[i] = R-L;
+				R--;
+			}
+		}
+	}
+}
+
+// Driver program
+int main()
+{
+	string text = "GEEKS FOR GEEKS";
+	string pattern = "GEEK";
+	search(text, pattern);
+	return 0;
+}
+
+
+
+
+
+
