@@ -345,17 +345,15 @@ A Z-value for a position in the string tells you how many characters from that p
 #include<iostream>
 using namespace std;
 
-
 void search(string text, string pattern)
 {
 	// Create concatenated string "P$T"
 	string concat = pattern + "$" + text;
 	int l = concat.length();
-
+	
 	// Construct Z array
-	int Z[l];
-	getZarr(concat, Z);
-
+	vector<int> Z = z_function(concat);
+	
 	// now looping through Z array for matching condition
 	for (int i = 0; i < l; ++i)
 	{
@@ -367,53 +365,37 @@ void search(string text, string pattern)
 	}
 }
 
-// ⭐ The characters in str from index L to R match the characters from the beginning of str.
+// ⭐ The characters in str from index L to R match the characters from the beginning of str. [ l, r )
 // Fills Z array for given string str[]
-void getZarr(string str, int Z[])
-{
-	int n = str.length();
-	int L, R, k;
-
-	// [L,R] make a window which matches with prefix of s
-	L = R = 0;
-	for (int i = 1; i < n; ++i)
-	{
-		// If i is Outside the Current Window:
-		if (i > R)
-		{
-			L = R = i; // If i is outside the current window (i > R), we start a new window.
-
-	               // Expand the Window: While the characters match (str[R-L] == str[R]), increase R
-			while (R<n && str[R-L] == str[R])
-				R++;
-			Z[i] = R-L;
-			R--;
-		}
-		else
-		{       // Calculate k: k is the position relative to the start of the current window.
-			// k = i-L so k corresponds to number which matches in [L,R] interval.
-			k = i-L;
-
-			// if Z[k] is less than remaining interval
-			// then Z[i] will be equal to Z[k].
-			// For example, str = "ababab", i = 3, R = 5
-			// and L = 2
-			if (Z[k] < R-i+1)
-				Z[i] = Z[k];
-
-			// For example str = "aaaaaa" and i = 2, R is 5,
-			// L is 0
-			else
-			{
-				// else start from R and check manually
-				L = i;
-				while (R<n && str[R-L] == str[R])
-					R++;
-				Z[i] = R-L;
-				R--;
-			}
-		}
-	}
+vector<int> z_function(string s) {
+    int n = s.size();
+    vector<int> z(n);
+    int l = 0, r = 0;
+	
+    for(int i = 1; i < n; i++) {
+        if(i < r) { 
+//  the current position is inside the current segment match  [l, r).
+// Then we can use the already calculated Z-values to "initialize" the value of  z[i]  to something (it sure is better than "starting from zero")
+// we observe that the substrings  s[l .... r)  and  s[0 .... r-l)  match
+		// example xyzxyx for this let l = 3 and r = 6 now i = 4
+		// the substring i to r is already in the prefix but where 
+		// that is given by i - l // move l to zero that means merko i ko bhi to l move krna pdega i-l
+		// but sometime this z value may be larger than our [l,r) window mae sirf is window kae andr ka 
+		// bata skta hu iske bhr nhi to isiliyae mae sirf window kae andr ki hi initail value dunga 
+		// min (r-i,z[i-l])
+            z[i] = min(r - i, z[i - l]);
+        }
+	    // start mae jadatr ka z[i]=0 ya koi init val hoga 
+        while(i + z[i] < n && s[z[i]] == s[i + z[i]]) {
+            z[i]++;
+        }
+	    // assigning window l,r their values
+        if(i + z[i] > r) {
+            l = i;
+            r = i + z[i];
+        }
+    }
+    return z;
 }
 
 // Driver program
