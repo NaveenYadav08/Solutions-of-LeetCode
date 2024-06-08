@@ -5,6 +5,15 @@ and moving it to the sorted portion of the list.
 
 Selection Sort	O(n2)	O(n2)	O(n2) ALL CASES
 
+
+Advantages of Selection Sort Algorithm
+        Simple and easy to understand.
+        Works well with small datasets.
+Disadvantages of the Selection Sort Algorithm
+        Selection sort has a time complexity of O(n^2) in the worst and average case.
+        Does not work well on large datasets.
+        Unstable Does not preserve the relative order of items with equal keys which means it is not stable.
+
 void selectionSort(int arr[], int n)
 {
 
