@@ -14,6 +14,7 @@ Disadvantages of the Selection Sort Algorithm
         Does not work well on large datasets.
         Unstable Does not preserve the relative order of items with equal keys which means it is not stable.
 
+// ITERATIVE //
 void selectionSort(int arr[], int n)
 {
 
@@ -34,4 +35,22 @@ void selectionSort(int arr[], int n)
         if (min_idx != i)
             swap(arr[min_idx], arr[i]);
     }
+}
+
+
+// RECURSIVE //
+void insertion_sort(int arr[], int i, int n) {
+
+    // Base Case: i == n.
+    if (i == n) return;
+
+    int j = i;
+    while (j > 0 && arr[j - 1] > arr[j]) {
+        int temp = arr[j - 1];
+        arr[j - 1] = arr[j];
+        arr[j] = temp;
+        j--;
+    }
+
+    insertion_sort(arr, i + 1, n);
 }
