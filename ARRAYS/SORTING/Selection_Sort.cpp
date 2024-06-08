@@ -36,3 +36,23 @@ void selectionSort(int arr[], int n)
             swap(arr[min_idx], arr[i]);
     }
 }
+
+
+//  RECURSIVE //
+void recurSelectionSort(int a[], int n, int index = 0)
+{
+    // Return when starting and size are same
+    if (index == n)
+       return;
+ 
+    // calling minimum index function for minimum index // 
+    // minidx from idx to last //
+    int k = minIndex(a, index, n-1);
+ 
+    // Swapping when index and minimum index are not same
+    if (k != index)
+       swap(a[k], a[index]);
+ 
+    // Recursively calling selection sort function
+    recurSelectionSort(a, n, index + 1);
+}
