@@ -23,6 +23,27 @@ after the pivot is placed in its correct position and this finally sorts the arr
   4. Concatenate the sorted sub-arrays along with the pivot to form the final sorted array. 
 
 
+Best/Average Case: Ω (N log (N))
+    The best-case scenario for quicksort occur when the pivot chosen at the 
+    each step divides the array into roughly equal halves.
+Worst Case: O(N^2)
+    The worst-case Scenario for Quicksort occur when the pivot at each step 
+    consistently results in highly unbalanced partitions. 
+    When the array is already sorted & the pivot is always chosen as the smallest or largest element. 
+    To mitigate the worst-case Scenario, various techniques are used such as choosing a good pivot 
+    using Randomized algorithm (Randomized Quicksort ) to shuffle the element before sorting.
+
+
+Advantages of Quick Sort:
+      It is efficient on large data sets.
+      It has a low overhead, as it only requires a small amount of memory to function.
+Disadvantages of Quick Sort:
+      It has a worst-case time complexity of O(N2),
+      It is not a good choice for small data sets.
+      It is not a stable sort,
+             because here we are swapping elements according to the pivot’s position 
+             (without considering their original positions).
+
 // CODE //
 
 int partition(int arr[],int low,int high)
