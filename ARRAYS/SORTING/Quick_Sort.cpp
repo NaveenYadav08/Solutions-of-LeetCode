@@ -56,7 +56,8 @@ void quickSort(int arr[],int low,int high)
   if(low<high)
   {
     // pi is the partition return index of pivot
-    
+    // it place the pi element at its correct place and
+    // rec sort left and right.
     int pi=partition(arr,low,high);
     
     //Recursion Call
