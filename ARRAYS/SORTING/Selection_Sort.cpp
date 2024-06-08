@@ -3,6 +3,8 @@ Selection Sort
 Repeatedly selecting the smallest (or largest) element from the unsorted portion of the list 
 and moving it to the sorted portion of the list. 
 
+Selection Sort	O(n2)	O(n2)	O(n2) ALL CASES
+
 void selectionSort(int arr[], int n)
 {
 
