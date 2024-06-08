@@ -44,6 +44,17 @@ Disadvantages of Quick Sort:
              because here we are swapping elements according to the pivot’s position 
              (without considering their original positions).
 
+
+// ⭐⭐  RANDOM PARTITION ⭐⭐ //
+    // finding the pivot element and partition the array along that
+    int randomPartition(int arr[], int l, int r)
+    {
+        int n = r-l+1;
+        int pivot = rand() % n;
+        swap(&arr[l + pivot], &arr[r]);
+        return partition(arr, l, r);
+    }
+
 // CODE //
 
 int partition(int arr[],int low,int high)
