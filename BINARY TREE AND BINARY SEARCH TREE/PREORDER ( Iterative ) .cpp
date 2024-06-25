@@ -11,7 +11,7 @@
 ….a) Pop an item from the stack and print it. 
 ….b) Push right child of a popped item to stack 
 ….c) Push left child of a popped item to stack
-The right child is pushed before the left child to make sure that the left subtree is processed first.
+The right child is pushed before the left child to make sure that the left subtree is processed first bcz of LIFO nature of stack.
   
 
 
@@ -22,36 +22,22 @@ The right child is pushed before the left child to make sure that the left subtr
 ╚█████╔╝╚█████╔╝██████╔╝███████╗
 ░╚════╝░░╚════╝░╚═════╝░╚══════╝
 
-void preorderIterative(Node* root)
-{
-    if (root == NULL)
-        return;
- 
-    stack<Node*> st;
- 
-    // start from root node (set current node to root node)
-    Node* curr = root;
- 
-    // run till stack is not empty or current is
-    // not NULL
-    while (!st.empty() || curr != NULL) {
-        // Print left children while exist
-        // and keep pushing right into the
-        // stack.
-        while (curr != NULL) {
-            cout << curr->data << " ";
- 
-            if (curr->right)
-                st.push(curr->right);
- 
-            curr = curr->left;
+    vector<int> preorderTraversal(TreeNode* root) {
+        if(!root) return {};
+        
+        vector<int> ans;
+        stack<TreeNode*> s;
+        s.push(root);
+        while(!s.empty())
+        {
+            TreeNode* temp = s.top();
+            s.pop();
+            ans.push_back(temp->val);
+            if(temp->right)
+                s.push(temp->right);
+            if(temp->left)
+                s.push(temp->left);
+            
         }
- 
-        // We reach when curr is NULL, so We
-        // take out a right child from stack
-        if (st.empty() == false) {
-            curr = st.top();
-            st.pop();
-        }
+        return ans;
     }
-}
