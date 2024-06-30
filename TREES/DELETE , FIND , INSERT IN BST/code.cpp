@@ -19,7 +19,7 @@ public:
     }
 };
 
-SEARCH 
+SEARCH  - O( Height )
 class Solution {
 public:
     TreeNode* searchBST(TreeNode* root, int val) {
@@ -38,7 +38,7 @@ public:
 };
 
 
-DELETE
+DELETE  - O( Height )
 class Solution {
 public:
     int findminfromright(TreeNode* root){
