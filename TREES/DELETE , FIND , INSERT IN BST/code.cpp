@@ -2,6 +2,8 @@ INSERT   https://leetcode.com/problems/insert-into-a-binary-search-tree/
 SEARCH   https://leetcode.com/problems/search-in-a-binary-search-tree/
 DELETE   https://leetcode.com/problems/delete-node-in-a-bst/
 
+// IN BST no hard rule if element == x either insert left or right
+
 
 
 INSERT  
