@@ -84,3 +84,45 @@ public:
 };
 };
 
+
+
+// DELETE THE NODE SAME SAME JUST for INORDER PREDECESSOR
+class Solution {
+public:
+    int findmaxfromleft(TreeNode* root){
+        while(root->right!=nullptr)
+            root=root->right;
+        return root->val;
+    }
+
+    TreeNode* deleteNode(TreeNode* root, int key) {
+        
+        if(root==nullptr) return root;
+        else if(root->val>key) root->left=deleteNode(root->left,key);
+        else if(root->val<key) root->right=deleteNode(root->right,key);
+        else{
+		// LEAF NODE
+            if(root->left==NULL and root->right==NULL){
+                delete root;
+		return NULL;
+	    }	// ONLY ONE CHILD EXIST A
+            if(root->right==nullptr){
+                TreeNode* temp =  root->left;
+		delete root;
+		return temp;
+            }  // ONLY ONE CHILD EXIST B
+	    else if(root->left==nullptr){
+                TreeNode* temp =  root->right;
+		delete root;
+		return temp;
+            } // BOTH CHILD EXIST
+	    else{
+		// replace the root value by find the minimum val from right side 
+                root->val=findmaxfromleft(root->left);
+                root->left = deleteNode(root->left, root->val);
+            }
+        }
+        return root;
+    }
+};
+
