@@ -73,7 +73,7 @@ public:
 		// or change accordingly for max from left side.
 
 	        // After replacing the root value we will delete the 
-		// inorder successor or predecessor
+		// inorder successor or predecessor recusrively.
                 root->val=findminfromright(root->right);
                 root->right = deleteNode(root->right, root->val);
             }
