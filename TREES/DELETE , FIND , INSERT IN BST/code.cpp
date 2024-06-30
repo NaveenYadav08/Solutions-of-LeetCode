@@ -6,7 +6,7 @@ DELETE   https://leetcode.com/problems/delete-node-in-a-bst/
 
 
 
-INSERT  
+INSERT   - O( Height )
 class Solution {
 public:
     TreeNode* insertIntoBST(TreeNode* root, int val) {
