@@ -46,22 +46,34 @@ public:
             root=root->left;
         return root->val;
     }
-    // to delete the node I can either put the inorder succesor or inorder predesccor.
-   // del that node and put inpre/insuc inplace of that and remove the inpre/insuc from its original place.
+
     TreeNode* deleteNode(TreeNode* root, int key) {
         
         if(root==nullptr) return root;
         else if(root->val>key) root->left=deleteNode(root->left,key);
         else if(root->val<key) root->right=deleteNode(root->right,key);
         else{
-            if(root->left==NULL and root->right==NULL)
-                return NULL;
+		// LEAF NODE
+            if(root->left==NULL and root->right==NULL){
+                delete root;
+		return NULL;
+	    }	// ONLY ONE CHILD EXIST A
             if(root->right==nullptr){
-                return root->left;
-            }else if(root->left==nullptr){
-                return root->right;
-            }else{
-			    //replace the root value by find the minimum val from right side 
+                TreeNode* temp =  root->left;
+		delete root;
+		return temp;
+            }  // ONLY ONE CHILD EXIST B
+	    else if(root->left==nullptr){
+                TreeNode* temp =  root->right;
+		delete root;
+		return temp;
+            } // BOTH CHILD EXIST
+	    else{
+		// replace the root value by find the minimum val from right side 
+		// or change accordingly for max from left side.
+
+	        // After replacing the root value we will delete the 
+		// inorder successor or predecessor
                 root->val=findminfromright(root->right);
                 root->right = deleteNode(root->right, root->val);
             }
