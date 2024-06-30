@@ -47,6 +47,7 @@ public:
         return root->val;
     }
     // to delete the node I can either put the inorder succesor or inorder predesccor.
+   // del that node and put inpre/insuc inplace of that and remove the inpre/insuc from its original place.
     TreeNode* deleteNode(TreeNode* root, int key) {
         
         if(root==nullptr) return root;
