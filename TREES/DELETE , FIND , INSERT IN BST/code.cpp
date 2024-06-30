@@ -46,7 +46,7 @@ public:
             root=root->left;
         return root->val;
     }
-    
+    // to delete the node I can either put the inorder succesor or inorder predesccor.
     TreeNode* deleteNode(TreeNode* root, int key) {
         
         if(root==nullptr) return root;
