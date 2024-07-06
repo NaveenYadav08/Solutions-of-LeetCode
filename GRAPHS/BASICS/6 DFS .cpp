@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-//DFS
+//DFS = O ( V + E )  SC = O ( V )
 
 // class Graph
 // GENERIC GRAPH
