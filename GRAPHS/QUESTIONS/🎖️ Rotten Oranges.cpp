@@ -1,7 +1,7 @@
 https://practice.geeksforgeeks.org/problems/rotten-oranges2536/1
 // 2 Approaches BFS - DFS
 
-// BFS
+// BFS - multi source
 class Solution 
 {
     public:
