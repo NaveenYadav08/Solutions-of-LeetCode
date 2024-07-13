@@ -3,6 +3,12 @@ A bipartite graph is a graph in which the vertices can be divided into two disjo
 it is a graph in which every edge connects a vertex of one set to a vertex of the other set.
 
 
+No odd-length cycles: A bipartite graph cannot contain any odd-length cycles, as this would require vertices from the same set to be connected by an edge.
+
+
+EVEN len cycle may or maynot be bipartite.
+
+
 #include <bits/stdc++.h>
 using namespace std;
 
