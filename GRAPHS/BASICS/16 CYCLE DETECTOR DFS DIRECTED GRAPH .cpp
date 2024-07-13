@@ -1,3 +1,9 @@
+// THE Code for undirected graph not work in case of 
+A->B
+|  | 
+V  V
+C->D
+// where we can reach a node by 2 ways
 #include <bits/stdc++.h>
 using namespace std;
 
