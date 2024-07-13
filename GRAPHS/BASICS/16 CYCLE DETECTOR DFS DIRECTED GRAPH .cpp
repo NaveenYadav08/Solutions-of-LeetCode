@@ -5,6 +5,8 @@ V  V
 C->D
 // where we can reach a node by 2 ways
 // in directed graph on same path node need to be visited for cycle.
+
+    
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -52,7 +54,7 @@ bool cycle_helper( int node, bool *visited, bool *arrayy)
            return true;
         }
     }
-    // leave a node 
+    // leave a node when we go back from the node
     arrayy[node]=false;
    return false;
 }
