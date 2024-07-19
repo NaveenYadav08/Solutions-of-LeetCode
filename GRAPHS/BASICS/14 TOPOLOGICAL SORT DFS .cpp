@@ -1,3 +1,6 @@
+TOPOLOGICAL SORTING is there in DAG ( directed acacliyc graph ) 
+and it means the linear ordering of vertices such that if there is edge between U and V then U appear before V in that ordereing.
+
 #include <bits/stdc++.h>
 using namespace std;
 
