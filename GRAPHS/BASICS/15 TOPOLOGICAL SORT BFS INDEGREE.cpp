@@ -45,6 +45,7 @@ class Graph{
 
           //bfs
           queue<int> q;
+
           //1. Step find nodes with 0 indegree
           for( int i=0;i<V; i++)
           {
@@ -52,12 +53,15 @@ class Graph{
               q.push(i);
 
           }
+        //  this ⭐⭐⭐ step is to check cycle in Directed graph 
+        int count = 0;
           // start to remove elements from queue
           while(!q.empty())
           {
               int node =q.front();
               cout<<node<<" ";
               q.pop();
+              count ++;
               // iterate over nbrs of that node and reduce their indegree by 1
               for( auto nbr:l[node] )
               {
@@ -69,6 +73,9 @@ class Graph{
               }
 
           }
+        if(count==v) cout<<"Cycle not present"<<endl;
+        else
+          cout<<"Cycle present"<<endl;
 
       }
 
