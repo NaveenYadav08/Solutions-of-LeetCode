@@ -53,15 +53,14 @@ class Graph{
               q.push(i);
 
           }
-        //  this ⭐⭐⭐ step is to check cycle in Directed graph 
-        int count = 0;
+
           // start to remove elements from queue
           while(!q.empty())
           {
               int node =q.front();
               cout<<node<<" ";
               q.pop();
-              count ++;
+
               // iterate over nbrs of that node and reduce their indegree by 1
               for( auto nbr:l[node] )
               {
@@ -73,9 +72,7 @@ class Graph{
               }
 
           }
-        if(count==v) cout<<"Cycle not present"<<endl;
-        else
-          cout<<"Cycle present"<<endl;
+
 
       }
 
@@ -100,3 +97,45 @@ int main() {
     
     
 }
+
+
+
+
+// CODE ⭐⭐⭐⭐⭐ to detect cycle in directied graph BFS //
+bool isCyclic(int V, vector<int> adj[]){
+        
+       // Step 1: Store the indegree of all the nodes
+       int indeg[V] = {0};
+       for(int u=0; u<V; u++){
+           for(auto &v : adj[u])
+              indeg[v]++;
+       }
+       
+       // Step 2: Push all the nodes with indegree 0 to queue
+       queue<int> q;
+       for(int i=0; i<V; i++)
+          if(indeg[i] == 0)
+             q.push(i);
+             
+        
+        // Step 3: BFS
+        int cnt = 0;
+        while(!q.empty()){
+            
+            int node = q.front();
+            q.pop();
+            
+            cnt++;
+            
+            for(auto &v : adj[node]){
+                indeg[v]--;
+                if(indeg[v] == 0)
+                   q.push(v);
+            }
+            
+        }
+        
+        return !(cnt == V);
+        
+    }
+};
