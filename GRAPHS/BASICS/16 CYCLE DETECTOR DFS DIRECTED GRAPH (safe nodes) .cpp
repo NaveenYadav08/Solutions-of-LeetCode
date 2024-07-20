@@ -101,3 +101,71 @@ int main() {
         cout<<"NO"<<endl;
 
 }
+
+
+
+⭐⭐⭐⭐⭐⭐⭐ SAFE NODES ⭐⭐⭐⭐⭐⭐⭐ 
+
+https://leetcode.com/problems/find-eventual-safe-states/
+
+
+class Solution {
+public:
+
+bool cycle_helper( int node, bool *visited, bool *arrayy, bool *checksafe, vector<vector<int>>& graph)
+{
+    visited[node]=true;
+    arrayy[node]=true;
+    for(auto nbr:graph[node])
+    {
+        //two cases
+        if(!visited[nbr])
+        { // go and recursively visit neighbour
+         bool cycle_mila = cycle_helper(nbr,visited,arrayy,checksafe,graph);
+         if(cycle_mila)
+         { return true;
+
+         }
+           
+
+        }
+        // nbr visit and part of current path backedge , means that the node is visited and part of curr path 
+        // for those who are vis but not part of curr path are not cycle 
+        else if(arrayy[nbr]==true)
+        {
+           return true;
+        }
+    }
+    // leave a node when we go back from the node
+    arrayy[node]=false;
+    checksafe[node]=true;
+   return false;
+}
+
+    vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
+     int V = graph.size();
+     bool *visited =new bool[V];
+     bool *arrayy = new bool[V];
+     bool *checksafe = new bool[V];
+     for( int i=0; i<V; i++ )
+     {
+         visited[i]=false;
+         arrayy[i]=false;
+         checksafe[i]=false;
+
+     }
+     vector<int> ans;
+    
+    for(int i=0;i<V;i++)
+     {
+        if(!visited[i])
+        cycle_helper(i,visited,arrayy,checksafe,graph);
+     }
+     for(int i=0;i<V;i++)
+     {
+        if(checksafe[i]) ans.push_back(i);
+     }
+     return ans;
+
+    }
+};
