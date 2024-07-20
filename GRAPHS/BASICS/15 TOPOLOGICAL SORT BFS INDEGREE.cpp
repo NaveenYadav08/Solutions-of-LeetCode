@@ -1,3 +1,8 @@
+# BFS indegree Kahn's algorithm
+# Kahn’s Algorithm for Topological Sorting is a method used to order the vertices of a directed graph in a linear order such that for every 
+# directed edge from vertex A to vertex B, A comes before B in the order. The algorithm works by repeatedly finding vertices with no incoming 
+# edges, removing them from the graph, and updating the incoming edges of the remaining vertices. This process continues until all vertices have been ordered.
+
 #include <bits/stdc++.h>
 using namespace std;
 
