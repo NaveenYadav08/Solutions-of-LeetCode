@@ -107,6 +107,7 @@ int main()
 
 
 ⭐⭐⭐⭐⭐⭐ WAY 02 using priority queue ⭐⭐⭐⭐⭐⭐
+                using set is better that pq
 
 class Solution
 {
