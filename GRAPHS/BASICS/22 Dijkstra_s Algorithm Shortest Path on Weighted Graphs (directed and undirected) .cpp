@@ -1,3 +1,5 @@
+TC = E Log ( V )
+
 #include<bits/stdc++.h>
 using namespace std;
 
