@@ -1,5 +1,48 @@
 TC = E Log ( V )
 
+
+///////////////////// using set //////////////////////////////////
+
+ vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
+    {
+        // Code here
+        set<pair<int,int>>st;
+        vector<int>dist(V, INT_MAX);
+        dist[S]=0;
+        st.insert(make_pair(0,S));
+        
+        while(!st.empty()){
+            auto top= *(st.begin());
+            int distNode=top.first;
+            int topNode= top.second;
+            
+            st.erase(top);
+            
+            //traversing top neighbours
+            
+            for(auto neighbour: adj[topNode]){
+                if(distNode+neighbour[1] < dist[neighbour[0]]){
+                    auto record=  st.find(make_pair(dist[neighbour[0]], neighbour[0]));
+                    
+                    if(record!=st.end()){
+                        st.erase(record);
+                    }
+                    
+                    //distance update
+                    dist[neighbour[0]]=distNode+neighbour[1];
+                    
+                    //record push into set
+                    st.insert(make_pair(dist[neighbour[0]],neighbour[0]));
+                }
+            }
+        }
+        return dist;
+    }
+
+
+
+
+// ⭐⭐⭐ general⭐⭐⭐  //
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -107,7 +150,8 @@ int main()
 
 
 ⭐⭐⭐⭐⭐⭐ WAY 02 using priority queue ⭐⭐⭐⭐⭐⭐
-                using set is better that pq
+                using set is better that pq because set can erase the value if we find better 
+                but not in pq
 
 class Solution
 {
