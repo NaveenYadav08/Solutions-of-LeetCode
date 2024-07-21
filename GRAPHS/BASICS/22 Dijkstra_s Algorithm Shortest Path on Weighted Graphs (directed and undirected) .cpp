@@ -42,7 +42,7 @@ TC = E Log ( V )
 
 
 
-// ⭐⭐⭐ general⭐⭐⭐  //
+//////////////////////////////// ⭐⭐⭐ general⭐⭐⭐  /////////////////////
 #include<bits/stdc++.h>
 using namespace std;
 
