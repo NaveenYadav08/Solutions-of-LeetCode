@@ -1,3 +1,5 @@
 Directed and Undirected Weighted Graph: Dijkstra’s Algorithm
 Undirected Weighted Graph: Dijkstra’s Algorithm
 Undirected Unweighted Graph: BFS (Breadth-First Search)
+
+ Dijkstra’s Algorithm not applicable on negative weight graphs.
