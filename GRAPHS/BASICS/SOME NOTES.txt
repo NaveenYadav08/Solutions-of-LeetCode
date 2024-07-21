@@ -2,4 +2,6 @@ Directed and Undirected Weighted Graph: Dijkstra’s Algorithm
 Undirected Weighted Graph: Dijkstra’s Algorithm
 Undirected Unweighted Graph: BFS (Breadth-First Search)
 
- Dijkstra’s Algorithm not applicable on negative weight graphs.
+ Dijkstra’s Algorithm not applicable on negative weight graphs.  WHY ? 
+it do not work on single negative weight cycle graph it is because it is always going to update that as 
+always decreasing the distance with negative value.
