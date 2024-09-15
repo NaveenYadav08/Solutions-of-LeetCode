@@ -1,5 +1,6 @@
 https://leetcode.com/problems/rotate-array/
-
+TC = O(N) 
+SC = O(1)
 C++
     void rotate(vector<int>& nums, int k) {
         int n = nums.size();
