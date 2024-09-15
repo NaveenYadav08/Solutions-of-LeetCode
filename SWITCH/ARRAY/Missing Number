@@ -1,0 +1,68 @@
+https://leetcode.com/problems/missing-number/description/
+
+TC = O(N) 
+SC = O(1)
+
+C++
+    int missingNumber(vector<int>& nums) {
+        int XOR=0;
+        for(int i=0;i<nums.size();i++)
+        {
+            XOR=XOR^(i+1)^nums[i];
+        }
+        int temp = XOR;
+        int j=0;
+        while(temp!=0 && temp&1==0)
+        {
+            j++;
+            temp=temp>>1;
+        }
+        int a=0;
+        int b=0;
+        int J=1<<j;
+        for(int i=0;i<nums.size();i++)
+        {
+            if(J&nums[i]) a=a^nums[i];
+            else
+            b=b^nums[i];
+            if(J&(i+1)) a=a^(i+1);
+            else
+            b=b^(i+1);
+        }
+        if(a!=0) return a;
+        else return b;
+    }
+
+JAVA
+    public int missingNumber(int[] nums) {
+        int XOR = 0;
+        for (int i = 0; i < nums.length; i++) {
+            XOR = XOR ^ (i + 1) ^ nums[i];
+        }
+        int temp = XOR;
+        int j = 0;
+        // Find the first set bit in the XOR result
+        while ((temp!=0) && (temp & 1) == 0) {
+            j++;
+            temp = temp >> 1;
+        }
+        int a = 0;
+        int b = 0;
+        int J = 1 << j; // Bitmask for jth bit
+        // Divide elements into two groups based on the jth bit and XOR them
+        for (int i = 0; i < nums.length; i++) {
+            if ((J & nums[i]) == 1) 
+                a = a ^ nums[i];
+            else 
+                b = b ^ nums[i];
+            
+            if ((J & (i + 1)) == 1) 
+                a = a ^ (i + 1);
+            else 
+                b = b ^ (i + 1);
+        }
+        if (a != 0) 
+            return a;
+        else 
+            return b;
+    }
