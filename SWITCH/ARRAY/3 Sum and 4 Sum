@@ -1,0 +1,149 @@
+https://leetcode.com/problems/3sum/description/
+Duplicate Elements
+
+TC - O(N²)
+SC - O(1)
+
+C++
+    vector<vector<int>> threeSum(vector<int> &arr) {
+        vector<vector<int>> ans;
+        int n = arr.size();
+        sort(arr.begin(), arr.end());
+        for (int i = 0; i < n; i++) {
+            //remove duplicates:
+            if (i != 0 && arr[i] == arr[i - 1]) continue;
+            //moving 2 pointers:
+            int j = i + 1;
+            int k = n - 1;
+            while (j < k) {
+                int sum = arr[i] + arr[j] + arr[k];
+                if (sum < 0) {
+                    j++;
+                }
+                else if (sum > 0) {
+                    k--;
+                }
+                else {
+                    vector<int> temp = {arr[i], arr[j], arr[k]};
+                    ans.push_back(temp);
+                    j++;
+                    k--;
+                    //skip the duplicates:
+                    while (j < k && arr[j] == arr[j - 1]) j++;
+                    while (j < k && arr[k] == arr[k + 1]) k--;
+                }
+            }
+        }
+        return ans;
+    }
+
+
+
+
+JAVA
+    public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<>();
+        Arrays.sort(nums);
+
+        for (int i = 0; i < nums.length - 2; i++) {
+            if (i != 0 && nums[i] == nums[i - 1]) continue;
+            
+            int j = i + 1;
+            int k = nums.length - 1;
+            
+            while (j < k) {
+                int sum = nums[i] + nums[j] + nums[k];
+                System.out.println(nums[i] + "," + nums[j] + "," + nums[k]);
+                
+                if (sum > 0) {
+                    k--;
+                } else if (sum < 0) {
+                    j++;
+                } else {
+                    ans.add(Arrays.asList(nums[i], nums[j], nums[k]));
+                    j++;
+                    k--;
+                    
+                    while (j < k && nums[j] == nums[j - 1]) j++; 
+                    while (j < k && nums[k] == nums[k + 1]) k--; 
+                }
+            }
+        }
+        return ans;
+    }
+
+4 SUM
+https://leetcode.com/problems/4sum/description/
+
+TC - O(N³)
+SC - O(1)
+
+C++
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        int n = nums.size(); //size of the array
+        vector<vector<int>> ans;
+        sort(nums.begin(), nums.end());
+        for (int i = 0; i < n; i++) {
+            // avoid the duplicates while moving i:
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
+            for (int j = i + 1; j < n; j++) {
+                // avoid the duplicates while moving j:
+                if (j > i + 1 && nums[j] == nums[j - 1]) continue;
+                // 2 pointers:
+                int k = j + 1;
+                int l = n - 1;
+                while (k < l) {
+                    long long sum = nums[i];
+                    sum += nums[j];
+                    sum += nums[k];
+                    sum += nums[l];
+                    if (sum == target) {
+                        vector<int> temp = {nums[i], nums[j], nums[k], nums[l]};
+                        ans.push_back(temp);
+                        k++; l--;
+                        //skip the duplicates:
+                        while (k < l && nums[k] == nums[k - 1]) k++;
+                        while (k < l && nums[l] == nums[l + 1]) l--;
+                    }
+                    else if (sum < target) k++;
+                    else l--;
+                }
+            }
+        }
+        return ans;
+    }
+
+JAVA
+// Same as above for 3 SUM //
+   public List<List<Integer>> fourSum(int[] nums, int target) {
+        List<List<Integer>> ans = new ArrayList();
+        int n = nums.length;
+        Arrays.sort(nums);
+        for(int i=0;i<n-3;i++)
+        {
+            if(i!=0 && nums[i]==nums[i-1]) continue;
+            for(int j=i+1;j<n-2;j++)
+            {
+                if (j > (i + 1) && nums[j] == nums[j - 1]) continue;
+                int k=j+1;
+                int l=n-1;
+                while(k<l)
+                {
+                    long sum = (long)nums[i] + (long)nums[j] + (long)nums[k] + (long)nums[l];
+                    if(sum==target)
+                    {
+                        ans.add(Arrays.asList(nums[i], nums[j], nums[k], nums[l]));
+                        k++;
+                        l--;
+                        while(k<l && nums[k]==nums[k-1]) k++;
+                        while(k<l && nums[l]==nums[l+1]) l--;
+                    }
+                    else if(sum>target)
+                    l--;
+                    else
+                    k++;
+                } 
+            }
+        }
+        return ans;
+    }
