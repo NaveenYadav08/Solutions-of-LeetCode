@@ -14,14 +14,20 @@ void pascalTriangle(int n) {
 JAVA
 Print Pascal Triangle
     public List<List<Integer>> generate(int numRows) {
-        List<List<Integer>> ans = new ArrayList<>();
-        for (int i = 0; i < numRows; ++i) {
-        Integer[] temp = new Integer[i + 1];
-        Arrays.fill(temp, 1);
-        ans.add(Arrays.asList(temp));
+        List<List<Integer>> answer = new ArrayList<>();
+        if (numRows == 0) return answer;
+        answer.add(new ArrayList<>());
+        answer.get(0).add(1); // first row
+        for (int i = 1; i < numRows; i++) {
+            List<Integer> prev_row = answer.get(i - 1);
+            List<Integer> new_row = new ArrayList<>();
+            new_row.add(1); //segment-1
+            //segment-2
+            for (int j = 1; j < prev_row.size(); j++) {
+                new_row.add(prev_row.get(j - 1) + prev_row.get(j));
+            }
+            new_row.add(1); //segment-3
+           answer.add(new_row);
         }
-        for (int i = 2; i < numRows; ++i)
-        for (int j = 1; j < ans.get(i).size() - 1; ++j)
-            ans.get(i).set(j, ans.get(i - 1).get(j - 1) + ans.get(i - 1).get(j));
-        return ans;
+        return answer;
     }
