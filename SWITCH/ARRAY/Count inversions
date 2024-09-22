@@ -2,7 +2,7 @@
 // I think there is no O(1) space solution for this.
 
 // CODE -
-
+C++
 class Solution{
   public:
     //Counter to keep the count of inversions.
