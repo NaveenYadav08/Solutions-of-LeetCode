@@ -2,7 +2,12 @@ https://leetcode.com/problems/maximum-product-subarray/
 
 TC - O(N)
 SC - O(1)
+
 C++
+
+// IN CASE OF ODD NEGATIVES  I CAN IGNORE ONE NEGATIVE AND ANSWER WILL EITHER BE SUFFIX ARRAY OF IT OR PREFIX ARRAY OF IT
+// IF WE HAVE ZERO THAN THAT JUST DIVIDE MY ARRAY INTO PARTS AND I AM RETURNING MAX ANS FROM THESE PARTS
+
         int maxProduct(vector<int>& nums) {
                 int max_prod = INT_MIN;
                 int tmp_prod = 1;
