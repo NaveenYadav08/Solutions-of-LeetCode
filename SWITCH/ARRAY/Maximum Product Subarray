@@ -10,23 +10,23 @@ C++
 
         int maxProduct(vector<int>& nums) {
                 int max_prod = INT_MIN;
-                int tmp_prod = 1;
+                int curr = 1;
 
                 // from left side
                 for(int i=0; i<nums.size(); i++){
-                    tmp_prod *= nums[i];
-                    max_prod = max(max_prod, tmp_prod);
-                    if(tmp_prod==0){
-                        tmp_prod=1;
+                    curr *= nums[i];
+                    max_prod = max(max_prod, curr);
+                    if(curr==0){
+                        curr=1;
                     }
-                }tmp_prod = 1;
+                }curr = 1;
 
                 // from right side
                 for(int i=nums.size()-1; i>=0; i--){
-                    tmp_prod *= nums[i];
-                    max_prod = max(max_prod, tmp_prod);
-                    if(tmp_prod==0){
-                        tmp_prod=1;
+                    curr *= nums[i];
+                    max_prod = max(max_prod, curr);
+                    if(curr==0){
+                        curr=1;
                     }
                 }
                 return max_prod; 
