@@ -13,10 +13,10 @@ class Solution{
     // r: higher range
     //Function to sort and merge two parts of array.
     void merge(long long a[], long long p, long long q, long long r){
-        long long l = q-p+1;
+        long long l = q-p+1; // size of array
         long long a1[l];
     
-        long long l2 = r-q;
+        long long l2 = r-q; // size of array
         
         long long a2[l2];
         
