@@ -39,6 +39,8 @@ C++
                 }
                 // break if iteration gap=1 is completed:
                 if (gap == 1) break; // because next gap is ceil(1 / 2) = 1 infinfte loop
+                // for len = 9, gap = 5,3,2,1,1
+                // need to update weight after the check to ensure the gap == 1 work once
         
                 // Otherwise, calculate new gap:
                 gap = (gap / 2) + (gap % 2);
