@@ -29,7 +29,7 @@ class Solution{
             a2[i] = a[q+i+1];
         }
         
-        long long left = 0, right = 0, k = p;
+        long long left = 0, right = 0, k = p; // index to start putting elements in original array
         
         //Using two pointers over the two arrays which helps in storing the
         //smaller element and thus merging the array.
