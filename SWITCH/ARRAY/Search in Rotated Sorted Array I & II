@@ -1,3 +1,5 @@
+// ENSURE TO CHECK IN LEFT HALF FIRST THAN IN SECOND HALF
+// AND PUT <= in the check (nums[i]<=nums[mid])
 https://leetcode.com/problems/search-in-rotated-sorted-array/description/
 Search in Rotated Sorted Array I
 
