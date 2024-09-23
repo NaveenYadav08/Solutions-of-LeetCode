@@ -1,2 +1,63 @@
 https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/
+Find Minimum in Rotated Sorted Array I
 
+TC - O(logN)
+SC - O(N)
+
+
+    int findMin(vector<int>& nums) {
+        int i = 0;
+        int j = nums.size() - 1;
+        int ans = INT_MAX;
+
+        while (i <= j) {
+            int mid = (i+j) / 2;
+
+            // If the left part is sorted, move to the right part
+            // then arr[low] will always be
+            // the minimum in that which might be my possible answer:
+            if (nums[i] <= nums[mid]) {
+                ans = min(ans, nums[i]); // keep the min
+                i = mid + 1; // eliminate left half
+            } else { // Otherwise, right part is sorted move to the left part
+                ans = min(ans, nums[mid]);
+                j = mid - 1;
+            }
+        }
+        return ans;
+    }
+
+
+https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/
+Find Minimum in Rotated Sorted Array II
+
+TC - O(N/2) // worst case all elements are equal
+SC - O(1)
+
+    int findMin(vector<int>& nums) {
+        int i = 0;
+        int j = nums.size() - 1;
+        int ans = INT_MAX;
+
+        while (i <= j) {
+            int mid = (i+j) / 2;
+
+            // If elements at i, mid, and j are equal, reduce the search space
+            if (nums[i] == nums[mid] && nums[mid] == nums[j]) {
+                ans = min(ans, nums[i]);
+                i++;
+                j--;
+                continue;
+            }
+
+            // If the left part is sorted, move to the right part
+            if (nums[i] <= nums[mid]) {
+                ans = min(ans, nums[i]);
+                i = mid + 1;
+            } else { // Otherwise, move to the left part
+                ans = min(ans, nums[mid]);
+                j = mid - 1;
+            }
+        }
+        return ans;
+    }
