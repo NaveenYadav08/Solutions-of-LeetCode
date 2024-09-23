@@ -1,0 +1,85 @@
+https://leetcode.com/problems/search-in-rotated-sorted-array/description/
+Search in Rotated Sorted Array I
+
+TC - O(logN)
+SC - O(N)
+
+    int search(vector<int>& nums, int target) {
+        int n = nums.size();
+        int i =0;
+        int j = n-1;
+        while(i<=j)
+        {
+            int mid = (i+j)/2;
+            if(nums[mid]==target) return mid;
+            if(nums[i]<=nums[mid])
+            {
+                // first half is sorted
+                if(nums[i]<=target && target<=nums[mid])
+                j=mid-1;
+                else
+                i=mid+1;
+            
+            }
+            else
+            {   // second half is sorted; 
+                // target can be at i or j
+                if(nums[mid]<=target && target<=nums[j])
+                i=mid+1;
+                else
+                j=mid-1;
+            } 
+        }
+        return -1;
+    }
+
+
+
+https://leetcode.com/problems/search-in-rotated-sorted-array-ii/description/
+Search in Rotated Sorted Array II
+
+TC - O(N/2) // worst case all elements are equal
+SC - O(1)
+
+
+    bool search(vector<int>& nums, int target) {
+        int n = nums.size();
+        int i = 0;
+        int j = n-1;
+        while(i<=j)
+        {
+            int mid = (i+j)/2;
+            if(nums[mid]==target) return true;
+            if(nums[i]==nums[mid] && nums[mid]==nums[j])
+            {   // 3 1 2 3 3 3 3
+                // here as we are only comparing mid , i and j 
+                // we can not fix which half is sorted
+                i++;
+                j--;
+                continue;
+            }
+
+            if(nums[i]<=nums[mid]) // necessary to put <= here to avoid edge cases
+            // 3 1 target 1, here mid = 0, i=0, thus if = not put there
+            // it go in the other half which is false
+            {
+                
+                // first is sorted
+                if(nums[i]<=target && target<=nums[mid])
+                j=mid-1;
+                else
+                i=mid+1;
+            }
+            else
+            {   
+                // second is sorted;
+                if(nums[mid]<=target && target<=nums[j])
+                i=mid+1;
+                else
+                j=mid-1;
+            }
+        }
+        return false; 
+    }
+
+
