@@ -1,0 +1,27 @@
+https://www.geeksforgeeks.org/problems/square-root/1
+
+Possible Square root of a number
+
+TC - O(LogN)
+SC - O(1)
+
+    long long int floorSqrt(long long int n) {
+        long long low = 1;
+        long long high = n;
+        long long ans;
+        while(low<=high)
+        {
+            long long mid = (low + high)/2;
+            
+            if(mid*mid==n)
+            return mid;
+            if(mid*mid<n)
+            {ans=mid;low=mid+1;}
+            else
+            {high=mid-1;}
+        }
+        return ans;
+    }
+
+
+
