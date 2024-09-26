@@ -1,0 +1,26 @@
+https://leetcode.com/problems/kth-missing-positive-number/description/
+
+TC - O(logN)
+SC - O(1)
+
+C++
+    int findKthPositive(vector<int>& arr, int k) {
+        if(arr.size()==arr[arr.size()-1]) return arr[arr.size()-1]+k;
+        int low = 1; // 1 base indexing
+        int high = arr.size();
+        while(low<=high)
+        {
+            int mid=(low+high)/2;
+            int missing = arr[mid-1]-mid;
+            if(missing<k)
+            {
+                low=mid+1;
+            }
+            else
+            {
+                high=mid-1;
+            }
+        }
+        // simplified of arr[high]+(k-{arr[high]-high});
+        return high+k;
+    }
