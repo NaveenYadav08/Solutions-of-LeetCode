@@ -17,11 +17,14 @@ SC - O(1)
                       sum=arr[i];
                   }
               }
-              return Student<=m;
+              return Student<=m; // less than because 
+              // suppose 12, 34, 67, 90,  m = 4 and mid = 108
+              // here student count comes 3 ( 12+34, 67, 90 )
+              // I can split my distribution to cover more students keeping my mid same.
           }
           
           int findPages(vector<int>& arr, int n, int m) {
-              if(n<m) return -1;
+              if(n<m) return -1; // Edge Case
               int high = accumulate(arr.begin(),arr.end(),0);
               int low = *max_element(arr.begin(),arr.end());
               
@@ -29,7 +32,7 @@ SC - O(1)
               while(low<=high)
               {   
                   int mid = (low+high)/2;
-                  if(fun(arr,n,m,mid))
+                  if(fun(arr,n,m,mid)) 
                   {   
                       ans=mid;
                       high=mid-1;
