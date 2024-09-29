@@ -1,0 +1,43 @@
+https://www.geeksforgeeks.org/problems/minimize-max-distance-to-gas-station/1
+
+TC - O(logN)
+SC - O(N)
+
+c++
+   bool possible(vector<int>& s, int k, double mid)
+   {
+       int used = 0;
+       for(int i=0;i<s.size()-1;i++){
+           int diff = s[i+1]-s[i];
+           used+= ceil(diff/mid)-1; // This will handel the case of both exact divide 1/0,5 = 2 but 
+           // only one posible 
+           // and 1/0.75 = 1.33 = ceil = 2
+       }
+       return used<=k; 
+   }
+    
+      double findSmallestMaxDist(vector<int> &s, int k) {
+          // Code here
+          int n = s.size();
+          double low = 0.0;
+          double high = s[n-1] - s[0];
+          double ans = -1.0;
+          while(high-low>=1e-6)
+          {
+              double mid = (high+low)/2.0;
+              if(possible(s,k,mid))
+              {
+                  ans = mid;
+                  high = mid;
+                  // with k or less station i can make the max distance bw adjacents = mid;
+                  // so if I increase it i need even less stations
+              }
+              else
+              {
+                  low = mid;
+                  // i need more than k stations to make this happen
+                  // thus increase the dist;
+              }
+          }
+          return ans;
+      }
