@@ -1,3 +1,10 @@
+https://www.geeksforgeeks.org/problems/minimize-max-distance-to-gas-station/1
+
+TC - O(NlogN)
+SC - O(N)
+
+C++
+
 long double minimiseMaxDistance(vector<int> &arr, int k) {
     int n = arr.size(); //size of array.
     vector<int> howMany(n - 1, 0); // This array keep track that how many stations currently inserted 
