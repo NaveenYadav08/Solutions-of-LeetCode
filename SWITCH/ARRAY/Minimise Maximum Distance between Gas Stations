@@ -1,7 +1,7 @@
 https://www.geeksforgeeks.org/problems/minimize-max-distance-to-gas-station/1
 
 TC - O(logN)
-SC - O(N)
+SC - O(1)
 
 c++
    bool possible(vector<int>& s, int k, double mid)
