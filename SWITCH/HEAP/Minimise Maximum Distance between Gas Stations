@@ -1,0 +1,33 @@
+long double minimiseMaxDistance(vector<int> &arr, int k) {
+    int n = arr.size(); //size of array.
+    vector<int> howMany(n - 1, 0); // This array keep track that how many stations currently inserted 
+    // between station i and i+1
+    priority_queue<pair<long double, int>> pq;
+
+    //insert the first n-1 elements into pq
+    //with respective distance values:
+    for (int i = 0; i < n - 1; i++) {
+        pq.push({arr[i + 1] - arr[i], i});
+    }
+
+    //Place k gas stations one by one
+    for (int gasStations = 1; gasStations <= k; gasStations++) {
+        //Find the maximum section
+        //and insert the gas station:
+        auto tp = pq.top();
+        pq.pop();
+        int secInd = tp.second;
+
+        //insert the current gas station:
+        howMany[secInd]++;
+
+        // so basically keep track of how many stations are between i and i+1
+        // maintian priority queue with the max distance between stations ( even new ones )
+        // new ones distance calcualted by diff between [(i+1) and i] / [number of station b/w + 1]
+        long double diff_between = arr[secInd + 1] - arr[secInd];
+        long double newSecLen = diff_between / (long double)(howMany[secInd] + 1);
+        pq.push({newSecLen, secInd});
+    }
+    
+    return pq.top().first;
+}
