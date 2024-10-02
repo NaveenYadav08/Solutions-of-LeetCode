@@ -5,7 +5,7 @@ https://leetcode.com/problems/search-in-rotated-sorted-array/description/
 Search in Rotated Sorted Array I
 
 TC - O(logN)
-SC - O(N)
+SC - O(1)
 
     int search(vector<int>& nums, int target) {
         int n = nums.size();
