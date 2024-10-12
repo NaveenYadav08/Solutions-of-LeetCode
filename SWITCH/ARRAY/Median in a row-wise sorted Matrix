@@ -1,0 +1,41 @@
+https://www.geeksforgeeks.org/problems/median-in-a-row-wise-sorted-matrix1527/1
+
+TC - O(log(range)×R×logC)
+SC - O(1)
+
+          int find(vector<vector<int>> &matrix, int mid) {
+              int ans = 0;
+              for (int i = 0; i < matrix.size(); i++) {
+                  // The difference gives the count of elements less than or equal to 'mid'
+                  ans += upper_bound(matrix[i].begin(), matrix[i].end(), mid) - matrix[i].begin();
+              }
+              return ans; // Return the total count of elements <= mid
+          }
+          
+          int median(vector<vector<int>> &matrix, int R, int C) {
+              int low = INT_MAX;
+              int high = INT_MIN; 
+              int n = matrix.size();
+              int m = matrix[0].size();
+          
+              for (int i = 0; i < matrix.size(); i++) {
+                  for (int j = 0; j < matrix[0].size(); j++) {
+                      low = min(low, matrix[i][j]); 
+                      high = max(high, matrix[i][j]); 
+                  }
+              }
+          
+              int ans = -1;
+              while (low <= high) {
+                  int mid = (low + high) / 2;
+                  int number = find(matrix, mid); // Get count of numbers <= mid
+                  // If count is more than half of total elements, mid could be the median
+                  if (number > (m * n) / 2) {
+                      ans = mid; // Update ans to mid
+                      high = mid - 1; // Move high down to search for smaller potential median
+                  } else {
+                      low = mid + 1; // Move low up to search for larger potential median
+                  }
+              }
+              return ans; // Return the median value found
+          }
