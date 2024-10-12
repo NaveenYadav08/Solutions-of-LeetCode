@@ -1,4 +1,5 @@
-
+TC - O(median_index⋅logR)
+SC - O(R)
 
     int median(vector<vector<int>> &matrix, int R, int C) {
         priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> minHeap;
