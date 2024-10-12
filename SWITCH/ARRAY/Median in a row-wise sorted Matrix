@@ -3,6 +3,8 @@ https://www.geeksforgeeks.org/problems/median-in-a-row-wise-sorted-matrix1527/1
 TC - O(log(range)×R×logC)
 SC - O(1)
 
+R * C is always odd here
+
           int find(vector<vector<int>> &matrix, int mid) {
               int ans = 0;
               for (int i = 0; i < matrix.size(); i++) {
