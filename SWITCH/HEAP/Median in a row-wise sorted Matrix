@@ -1,8 +1,10 @@
+https://www.geeksforgeeks.org/problems/median-in-a-row-wise-sorted-matrix1527/1
+
 TC - O(median_index⋅logR)
 SC - O(R)
 
     int median(vector<vector<int>> &matrix, int R, int C) {
-        priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> minHeap;
+        priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> minHeap; // element, row, col //
         int medianIndex = (R * C) / 2;
         int count = 0, median = -1;
 
