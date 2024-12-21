@@ -14,7 +14,8 @@ https://www.youtube.com/watch?v=TvfGWVAv_cc
                 curr=curr->right;
             }
             else
-            {
+            {   // LNR 
+                // before go to left create a way to return back
                 TreeNode* Look_for_predecessor = curr->left;
                 while(Look_for_predecessor->right && Look_for_predecessor->right!=curr){
                     Look_for_predecessor = Look_for_predecessor ->right;
@@ -53,6 +54,8 @@ https://www.youtube.com/watch?v=TvfGWVAv_cc
             }
             else
             {
+                // NLR 
+                // before go to left create a way to return back
                 TreeNode* Look_for_predecessor = curr->left;
                 while(Look_for_predecessor->right && Look_for_predecessor->right!=curr){
                     Look_for_predecessor = Look_for_predecessor ->right;
