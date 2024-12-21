@@ -78,3 +78,49 @@ https://www.youtube.com/watch?v=TvfGWVAv_cc
         }
         return ans;
     }
+
+
+
+// POST ORDER MORRIS TRAVERSAL 
+// PREORDER = NRL 
+// REV POST ORDER = NLR 
+// ⭐ SO just swap left and right ( from preorder ) + reverse your FINAL ANS 
+
+    vector<int> postorderTraversal(TreeNode* root) {
+
+        vector<int> ans;
+        TreeNode* curr = root;
+        
+        while(curr)
+        {
+            if(!curr->right){
+                ans.push_back(curr->val);
+                curr=curr->left;
+            }
+            else
+            {   
+                // NLR
+                // before go to left create a way to return back
+                TreeNode* Look_for_successor = curr->right;
+                while(Look_for_successor->left && Look_for_successor->left!=curr){
+                    Look_for_successor = Look_for_successor ->left;
+                }
+                if(Look_for_successor->left==NULL) // fail due to this ( NOT VISITED )
+                {   
+                    ans.push_back(curr->val);
+                    Look_for_successor->left = curr;
+                    curr=curr->right;
+
+                }
+                else //  fail due to Look_for_successor->left!=curr ( VISITED )
+                {
+                    Look_for_successor->left=NULL; // Restore ( AS CURR IS ALREADY VIS )
+                                                      // ( NO NEED TO PRINT )
+                    curr=curr->left;
+                }
+
+            }
+        }
+        reverse(ans.begin(),ans.end());
+        return ans;
+    }
