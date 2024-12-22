@@ -1,0 +1,42 @@
+https://www.lintcode.com/problem/1098/description
+
+
+class Solution {
+public:
+    int ans;
+    unordered_map<int, int> mp;
+
+    void dfs(int key, int sum)
+    {
+        if(mp.find(key)==mp.end()) return;
+        sum+=mp[key];
+        int d=key/10;
+        int p = key%10;
+        int l = (d+1)*10 + (2*p -1); 
+        int r = l+1;
+        if(mp.find(l)==mp.end() && mp.find(r)==mp.end())
+        {
+            ans+=sum;
+            return;
+        }
+
+        dfs(l,sum);
+        dfs(r,sum);
+
+    }
+
+    int pathSumIV(vector<int> &nums) {
+    ans=0;
+    mp.clear();
+    //  ⭐ NUMBER IS OF FORM ABC and AB combo is unique
+    for(auto num:nums)
+    {
+        int key = num/10;
+        int val=num%10;
+        mp[key]=val;
+    }
+    dfs(11,0); // key, Sum
+    return ans;
+
+    }
+};
