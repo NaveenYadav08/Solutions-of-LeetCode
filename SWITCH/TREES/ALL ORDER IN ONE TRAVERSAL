@@ -1,5 +1,9 @@
 // PREORDER INORDER POSTORDER IN SINGLE TRAVERSAL //
 
+
+https://www.naukri.com/code360/problems/tree-traversal_981269
+
+
 vector<vector<int>> allorder(TreeNode* root) {
     vector<int> preorder, inorder, postorder;
     vector<vector<int>> result;
