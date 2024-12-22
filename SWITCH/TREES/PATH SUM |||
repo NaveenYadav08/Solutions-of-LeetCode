@@ -1,0 +1,38 @@
+https://leetcode.com/problems/path-sum-iii/description/
+
+
+
+class Solution {
+public:
+    int ans = 0;
+    unordered_map<long long int, int> mp; // 🧑🏻‍💻 prefix sum
+
+    void solve(TreeNode* curr, long long int targetSum, long long int prefixSum)
+    {
+        if (curr == NULL) return;
+        prefixSum += curr->val;
+
+        // Check if there's a path that sums to targetSum
+        // ⭐[x  |   p]  p - x  = target so x = p - target
+        if (mp.find(prefixSum - targetSum) != mp.end()) {
+            ans += mp[prefixSum - targetSum];
+        }
+
+        mp[prefixSum]++;
+        solve(curr->left, targetSum, prefixSum);
+        solve(curr->right, targetSum, prefixSum);
+        mp[prefixSum]--;
+    }
+
+    int pathSum(TreeNode* root, int targetSum) {
+        // Initialize the map with the base case: a sum of 0 occurs once
+        mp[0] = 1;
+
+        // Start the DFS traversal with the initial current sum of 0
+                //  ⭐ treating each path as an array 
+        // ⭐ root to leaf count and non root paths handel by prefix sum
+        solve(root, (long long int)targetSum, 0);
+
+        return ans;
+    }
+};
