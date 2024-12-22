@@ -1,0 +1,43 @@
+https://www.geeksforgeeks.org/problems/zigzag-tree-traversal/1
+
+
+
+// USING DEQUEUE //
+    vector <int> zigZagTraversal(Node* root)
+    {
+    	deque<Node* > dq;
+    	bool Left = true;
+    	dq.push_front(root);
+    	vector<int> ans;
+    	if(root==NULL) return {};
+    	while(!dq.empty())
+    	{
+    	    int n = dq.size();
+    	    for(int i=0;i<n;i++)
+    	    {
+    	        if(Left)
+    	        {
+    	            Node* temp = dq.front();
+    	            ans.push_back(temp->data);
+    	            dq.pop_front();
+    	            if(temp->left)
+    	            dq.push_back(temp->left);
+    	            if(temp->right)
+    	            dq.push_back(temp->right);
+    	        }
+    	        else{
+    	            Node* temp = dq.back();
+    	            ans.push_back(temp->data);
+    	            dq.pop_back();
+    	            if(temp->right)
+    	            dq.push_front(temp->right); 
+    	            if(temp->left)
+    	            dq.push_front(temp->left);
+    	        }
+    	    }
+    	    Left=!Left;
+    	}
+    	return ans;
+    	
+    	
+    }
