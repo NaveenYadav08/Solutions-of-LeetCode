@@ -1,0 +1,37 @@
+// PREORDER INORDER POSTORDER IN SINGLE TRAVERSAL //
+
+vector<vector<int>> allorder(TreeNode* root) {
+    vector<int> preorder, inorder, postorder;
+    vector<vector<int>> result;
+    
+    if (!root) return {preorder, inorder, postorder};
+    
+    // Stack to store nodes and states
+    stack<pair<TreeNode*, int>> st;
+    st.push({root, 1});
+    
+    while (!st.empty()) {
+        auto [node, state] = st.top();
+        st.pop();
+        
+        if (state == 1) {
+            // Preorder: First time visiting the node
+            preorder.push_back(node->val);
+            st.push({node, 2}); // Push with state 2 for in-order
+            if (node->left) st.push({node->left, 1}); // Push left child
+        } else if (state == 2) {
+            // Inorder: Second time visiting the node
+            inorder.push_back(node->val);
+            st.push({node, 3}); // Push with state 3 for post-order
+            if (node->right) st.push({node->right, 1}); // Push right child
+        } else {
+            // Postorder: Third time visiting the node
+            postorder.push_back(node->val);
+        }
+    }
+    
+    result.push_back(preorder);
+    result.push_back(inorder);
+    result.push_back(postorder);
+    return result;
+}
