@@ -1,0 +1,16 @@
+https://leetcode.com/problems/binary-tree-maximum-path-sum/
+
+int rec(TreeNode* root){
+    if(root==NULL) return 0;
+
+    int lh = max(0,rec(root->left)); // 💡BASICALLY KADANE ALGO OF TREE
+    int rh = max(0,rec(root->right));
+    ans = max(ans,root->val+lh+rh);
+    return root->val+max(lh,rh);
+}
+
+int maxPathSum(TreeNode* root) {
+        if(root==NULL) return 0;
+        rec(root);
+        return ans;
+}
