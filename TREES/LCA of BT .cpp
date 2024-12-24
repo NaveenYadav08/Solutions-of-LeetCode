@@ -1,6 +1,7 @@
 https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
 
 BOTH MUST BE PRESENT IN TREE 
+	THIS ALSO WORK IF NONE IS PRESENT 
 class Solution {
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
