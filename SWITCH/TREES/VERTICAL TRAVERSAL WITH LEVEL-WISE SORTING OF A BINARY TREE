@@ -1,0 +1,60 @@
+https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/
+
+## Overall Complexity:
+
+Let H be the height of the tree:
+
+1. **BFS Traversal**: O(N).
+
+2. **Map Insertions**: O(N log K ⋅ log M), where:
+   - K is the number of unique columns (at most N).
+   - M is the number of nodes per column-row (at most N).
+   - Thus, log K ≤ log N and log M ≤ log N, giving O(N log² N) in the worst case.
+
+3. **Result Construction**: O(N).
+
+### Final Time Complexity:
+
+The overall time complexity is:  
+O(N log² N)
+
+
+class Solution {
+public:
+    vector<vector<int>> verticalTraversal(TreeNode* root) {
+        // Map to store nodes in the form {vrt -> {hrz -> multiset of values}}
+        map<int, map<int, multiset<int>>> nodes;
+        // Queue to perform BFS: stores {node, hrz, vrt}
+        queue<pair<TreeNode*, pair<int, int>>> q;
+
+        // Start BFS with the root at position (0, 0)
+        q.push({root, {0, 0}});
+        while (!q.empty()) {
+            auto [node, pos] = q.front();
+            q.pop();
+            int hrz = pos.first, vrt = pos.second;
+
+            // Add the node's value to the map
+            nodes[vrt][hrz].insert(node->val);
+
+            // Add the left and right children with their respective positions
+            if (node->left) {
+                q.push({node->left, {hrz + 1, vrt - 1}});
+            }
+            if (node->right) {
+                q.push({node->right, {hrz + 1, vrt + 1}});
+            }
+        }
+
+        // Prepare the result
+        vector<vector<int>> result;
+        for (auto& [vrt, rows] : nodes) {
+            vector<int> colVals;
+            for (auto& [hrz, values] : rows) {
+                colVals.insert(colVals.end(), values.begin(), values.end());
+            }
+            result.push_back(colVals);
+        }
+        return result;
+    }
+};
