@@ -23,6 +23,7 @@ class Solution {
 public:
     vector<vector<int>> verticalTraversal(TreeNode* root) {
         // Map to store nodes in the form {vrt -> {hrz -> multiset of values}}
+      //  ⭐ multiset bcz values can repeat
         map<int, map<int, multiset<int>>> nodes;
         // Queue to perform BFS: stores {node, hrz, vrt}
         queue<pair<TreeNode*, pair<int, int>>> q;
@@ -37,7 +38,7 @@ public:
             // Add the node's value to the map
             nodes[vrt][hrz].insert(node->val);
 
-            // Add the left and right children with their respective positions
+            //  ⭐ Add the left and right children with their respective positions
             if (node->left) {
                 q.push({node->left, {hrz + 1, vrt - 1}});
             }
