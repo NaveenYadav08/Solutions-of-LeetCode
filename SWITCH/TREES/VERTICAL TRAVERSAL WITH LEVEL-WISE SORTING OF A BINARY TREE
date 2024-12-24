@@ -22,40 +22,54 @@ O(N log² N)
 class Solution {
 public:
     vector<vector<int>> verticalTraversal(TreeNode* root) {
-        // Map to store nodes in the form {vrt -> {hrz -> multiset of values}}
-      //  ⭐ multiset bcz values can repeat
-        map<int, map<int, multiset<int>>> nodes;
-        // Queue to perform BFS: stores {node, hrz, vrt}
-        queue<pair<TreeNode*, pair<int, int>>> q;
-
-        // Start BFS with the root at position (0, 0)
-        q.push({root, {0, 0}});
-        while (!q.empty()) {
-            auto [node, pos] = q.front();
-            q.pop();
-            int hrz = pos.first, vrt = pos.second;
-
-            // Add the node's value to the map
-            nodes[vrt][hrz].insert(node->val);
-
-            //  ⭐ Add the left and right children with their respective positions
-            if (node->left) {
-                q.push({node->left, {hrz + 1, vrt - 1}});
-            }
-            if (node->right) {
-                q.push({node->right, {hrz + 1, vrt + 1}});
-            }
-        }
-
-        // Prepare the result
+        // Map to store nodes grouped by column and row: {column -> {row -> multiset of values}}
+        //  ⭐ multiset bcz values can repeat
+        map<int, map<int, multiset<int>>> columnMap;
+        // Queue for BFS traversal: {TreeNode*, {column, row}}
+        queue<pair<TreeNode*, pair<int, int>>> traversalQueue;
+        // Result vector
         vector<vector<int>> result;
-        for (auto& [vrt, rows] : nodes) {
-            vector<int> colVals;
-            for (auto& [hrz, values] : rows) {
-                colVals.insert(colVals.end(), values.begin(), values.end());
-            }
-            result.push_back(colVals);
+
+        if (root == nullptr) {
+            return result;
         }
+
+        // Initialize BFS
+        traversalQueue.push({root, {0, 0}});
+
+        // Perform BFS
+        while (!traversalQueue.empty()) {
+            auto current = traversalQueue.front();
+            traversalQueue.pop();
+
+            TreeNode* currentNode = current.first;
+            int column = current.second.first;
+            int row = current.second.second;
+
+            // Insert current node's value into the map
+            columnMap[column][row].insert(currentNode->val);
+
+            // Add left and right children to the queue with updated positions
+            if (currentNode->left != nullptr) {
+                traversalQueue.push({currentNode->left, {column - 1, row + 1}});
+            }
+            if (currentNode->right != nullptr) {
+                traversalQueue.push({currentNode->right, {column + 1, row + 1}});
+            }
+        }
+
+        // Build the result from the columnMap
+        for (auto& columnEntry : columnMap) {
+            vector<int> temp;
+            for (auto& rowEntry : columnEntry.second) {
+                const multiset<int>& values = rowEntry.second;
+                for (int value : values) {
+                    temp.push_back(value);
+                }
+            }
+            result.push_back(temp);
+        }
+
         return result;
     }
 };
