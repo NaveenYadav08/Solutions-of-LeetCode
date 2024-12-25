@@ -1,0 +1,54 @@
+https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/
+
+
+class Solution {
+public:
+void buildGraph(TreeNode* root, TreeNode* parent, unordered_map<TreeNode*, vector<TreeNode*>>& graph){
+    if(root==NULL) return;
+    if(parent)
+    {
+        graph[root].push_back(parent);
+        graph[parent].push_back(root);
+
+    }
+    buildGraph(root->left, root, graph);
+    buildGraph(root->right, root, graph);
+}
+
+    vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
+        unordered_map<TreeNode*, vector<TreeNode*>> graph;
+        buildGraph(root, NULL, graph);
+
+        unordered_map<TreeNode*, bool> visited;
+        int currDistance = 0;
+        queue<TreeNode* >q;
+
+        q.push(target);
+        visited[target]=true;
+        
+        while(!q.empty()){
+            if(currDistance==k) break;
+            int n = q.size();
+            for(int i=0;i<n;i++){
+                TreeNode* top = q.front();
+                q.pop();
+                for(int j=0;j<graph[top].size(); j++){
+                    if(!visited[graph[top][j]]){
+                        visited[graph[top][j]]=true;
+                        q.push(graph[top][j]);
+                    }
+                }
+            }
+            currDistance++;
+        }
+
+        vector<int> ans;
+        while(!q.empty()){
+            ans.push_back(q.front()->val);
+            q.pop();
+        }
+
+        return ans;
+
+    }
+};
