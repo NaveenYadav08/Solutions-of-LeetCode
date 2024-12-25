@@ -1,0 +1,19 @@
+https://leetcode.com/problems/count-complete-tree-nodes/description/
+
+⭐ LESS THAN O(N) time complexity
+
+class Solution {
+public:
+    int countNodes(TreeNode* root) {
+        if(root==NULL) return 0;
+        int l = 1;
+        int r = 1;
+        TreeNode* temp=root;
+        while(temp->left) {l++; temp=temp->left;}
+        temp=root;
+        while(temp->right) {r++; temp=temp->right;}
+        if(l==r) return ((1<<l) - 1); // means this one is full tree
+        else return 1 + countNodes(root->left) + countNodes(root->right);
+        // left and right will be full tree //
+    }
+};
