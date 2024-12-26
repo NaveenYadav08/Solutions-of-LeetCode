@@ -1,0 +1,42 @@
+https://leetcode.com/problems/flatten-binary-tree-to-linked-list/
+
+
+// ⭐ BEST SOLUTION // ITERATIVE // MORRIS TRAVERSAL // TC = N // SC = 1 ⭐ //
+    void flatten(TreeNode* root) {
+        if(root == NULL) return;
+        TreeNode* curr = root;
+        while(curr){
+            if(!curr->left){
+                curr=curr->right;
+            }
+            else
+            {   // ⭐ Marking the preorder predecessor of curr right -> point the curr right ( which is next in order ) 
+                //  ⭐ If I do not do this then I will loose the curr right subtree
+                TreeNode* temp = curr->left;
+                while(temp->right) temp=temp->right;
+                temp->right= curr->right;
+                curr->right=curr->left;
+                curr->left=NULL;
+                curr= curr->right; 
+            }
+        }
+    }
+
+
+// ⭐ DFS // RECURSIVE // REV PRE ORDER // KEEP TRACK OF PREV ⭐ //
+    TreeNode* rec(TreeNode*& root, TreeNode*& prev){
+        if(root==NULL) return NULL;
+        rec(root->right, prev);
+        rec(root->left, prev);
+        root->right=prev;
+        root->left=NULL;
+        prev=root;
+        return root;
+    }
+
+    void flatten(TreeNode* root) {
+        // REV PRE ORDER
+        if(root==NULL);
+        TreeNode* prev = NULL;
+        rec(root, prev);
+    }
