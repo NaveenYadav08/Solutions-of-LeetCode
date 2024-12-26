@@ -1,5 +1,6 @@
 https://leetcode.com/problems/flatten-binary-tree-to-linked-list/
 
+ 🌲 PREORDER 
 
 // ⭐ BEST SOLUTION // ITERATIVE // MORRIS TRAVERSAL // TC = N // SC = 1 ⭐ //
     void flatten(TreeNode* root) {
