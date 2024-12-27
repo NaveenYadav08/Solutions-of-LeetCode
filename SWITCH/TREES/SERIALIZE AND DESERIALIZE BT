@@ -1,0 +1,115 @@
+https://leetcode.com/problems/serialize-and-deserialize-binary-tree/description/
+
+EXAMPLE BINARY TREE 
+[1,2,3,null,null,4,5]
+
+
+//  ⭐ SERIALIZE STRING  1,2,X,X,3,4,X,X,5,X,X  //
+class Codec {
+public:
+    // Encodes a tree to a single string.
+    //  ⭐ NAVEEN DFS //
+    string serialize(TreeNode* root) {
+        if (root == nullptr) return "X";
+        return to_string(root->val)+","+serialize(root->left)+","+serialize(root->right);
+    }
+
+    TreeNode* decode(string& data) {
+        if(data[0]=='X'){
+            if(data.size()>1) data=data.substr(2);
+            return NULL;
+        }
+        else{
+            int pos = data.find(',');
+            int VAL = stoi(data.substr(0,pos));
+            TreeNode* root = new TreeNode(VAL);
+            data=data.substr(pos+1); 
+            root->left=decode(data);
+            root->right=decode(data);
+            return root;
+        }
+    }
+
+    // Decodes your encoded data to tree.
+    TreeNode* deserialize(string data) {
+        cout<<data<<endl;
+        return decode(data);
+    }
+
+};
+
+-------------------------------------------------------------------------
+//  ⭐ SERIALIZE STRING 1,2,3,X,X,4,5,X,X,X,X, //
+class Codec {
+public:
+    // ⭐ NAVEEN BFS //
+    // Encodes a tree to a single string.
+    string serialize(TreeNode* root) {
+        queue<TreeNode*> q;
+        if(root==NULL) return "";
+        q.push(root);
+        string ans = "";
+        while(!q.empty()){
+            TreeNode* top = q.front();
+            q.pop();
+            if(top==NULL){
+                ans+="X,";
+            }
+            else{
+                ans+=to_string(top->val);
+                ans+=",";
+                if(!top->left){
+                    q.push(NULL);
+                }
+                else{
+                    q.push(top->left);
+                }
+
+                if(!top->right){
+                    q.push(NULL);
+                }
+                else{
+                    q.push(top->right);
+                }
+            }
+        }
+        // cout<<ans<<endl;
+        return ans;
+    }
+
+    // Decodes your encoded data to tree.
+    TreeNode* deserialize(string data) {
+        if(data.size()==0) return NULL;
+        stringstream ss(data);
+        string str;
+        getline(ss,str,',');
+        queue<TreeNode*> q;
+        TreeNode* root = new TreeNode(stoi(str));
+        q.push(root);
+        
+        while(!q.empty()){
+            TreeNode* temp = q.front();
+            q.pop();
+            cout<<temp->val<<endl;
+            getline(ss,str,',');
+            if(str=="X"){
+                temp->left=NULL;
+            }else{
+                TreeNode* lft=new TreeNode(stoi(str));
+                q.push(lft);
+                temp->left=lft;
+            }
+            
+            getline(ss,str,',');
+            if(str=="X"){
+                temp->right=NULL;
+            }else{
+                TreeNode* rgt=new TreeNode(stoi(str));
+                q.push(rgt);
+                temp->right=rgt; 
+            }
+        }
+
+        return root;    
+    }
+};
