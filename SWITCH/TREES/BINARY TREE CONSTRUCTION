@@ -1,0 +1,111 @@
+// ⭐ PRE ORDER + IN ORDER ⭐ //
+https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/description/
+
+
+class Solution {
+public:
+    int preIndex = 0;
+    unordered_map<int,int> nodePositions;
+        
+    TreeNode* buildSubtree(vector<int> inorder, vector<int> preorder,int leftBound,int rightBound)
+    {
+        if(leftBound>rightBound) return NULL;
+        TreeNode* currentNode = new TreeNode(preorder[preIndex++]);
+        if(leftBound==rightBound) return currentNode;
+        int inorderPos = nodePositions[currentNode->val];
+        currentNode->left = buildSubtree(inorder,preorder,leftBound,inorderPos-1);
+        currentNode->right = buildSubtree(inorder,preorder,inorderPos+1,rightBound);
+        return currentNode;
+    }
+        
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        preIndex=0;
+        nodePositions.clear();
+        for(int i=0;i<inorder.size();i++)
+        {
+            nodePositions[inorder[i]]=i;
+        }
+        int n =inorder.size();
+        return buildSubtree(inorder,preorder,0,n-1);
+    }
+};
+
+
+//  ⭐ POST ORDER + IN ORDER ⭐ //
+https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/description/
+
+class Solution {
+public:
+    int postIndex=0;
+    unordered_map<int,int> nodePositions;
+    
+    TreeNode* buildSubtree(vector<int>& inorder, vector<int>& postorder, int leftBound, int rightBound) {
+        if(leftBound>rightBound) return NULL;
+        TreeNode* currentNode = new TreeNode(postorder[postIndex--]);
+        if(leftBound==rightBound) return currentNode;
+        int inorderPos = nodePositions[currentNode->val];
+        currentNode->right = buildSubtree(inorder,postorder,inorderPos+1,rightBound);
+        currentNode->left = buildSubtree(inorder,postorder,leftBound,inorderPos-1);
+        return currentNode;
+    }
+    
+    TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
+        postIndex = inorder.size()-1;
+        nodePositions.clear();
+        for(int i=0; i<inorder.size(); i++) {
+            nodePositions[inorder[i]]=i;
+        }
+        int n = inorder.size();
+        return buildSubtree(inorder,postorder,0,n-1);
+    }
+};
+
+
+// ⭐ POST ORDER + PRE ORDER ⭐ //
+// NOT UNIQUE //
+// IF FULL TREE THAN UNIQUE //
+https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/description/
+
+class Solution {
+public:
+    
+    int preIndex=0;
+    unordered_map<int,int> postPositions;
+    TreeNode* buildSubtree (vector<int>& preorder, vector<int>& postorder,
+                                    int leftBound, int rightBound, int size)
+    {
+        // Base case
+        if (preIndex >= size || leftBound > rightBound)
+            return NULL;
+        // The first TreeNode in preorder traversal is root. So take the TreeNode at
+        // preIndex from preorder and make it root, and increment preIndex
+        TreeNode* currentNode = new TreeNode ( preorder[preIndex] );
+        ++preIndex;
+        // If the current subarray has only one element, no need to recur
+        if (leftBound == rightBound)
+            return currentNode;
+        // Search the next element of pre[] in post[]
+        int postorderPos = postPositions[preorder[preIndex]];
+        // Use the index of element found in postorder to divide
+            // postorder array in two parts. Left subtree and right subtree
+        
+            currentNode->left = buildSubtree (preorder, postorder, 
+                                                    leftBound, postorderPos, size);
+            currentNode->right = buildSubtree (preorder, postorder,
+                                                    postorderPos + 1, rightBound-1, size);
+        
+        return currentNode;
+    }
+
+    TreeNode *constructFromPrePost (vector<int>& preorder, vector<int>& postorder)
+    {
+        preIndex = 0;
+        int size=preorder.size();
+        postPositions.clear();
+        for(int i=0;i<size;i++)
+        {
+            postPositions[postorder[i]]=i;
+        }
+        return buildSubtree (preorder, postorder, 0, size - 1, size);
+    }
+};
