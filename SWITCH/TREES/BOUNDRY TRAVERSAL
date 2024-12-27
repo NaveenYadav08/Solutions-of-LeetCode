@@ -1,0 +1,39 @@
+https://www.lintcode.com/problem/878/description
+
+class Solution {
+public:
+        void pre(TreeNode* root, vector<int>& ANS){
+            if((root==NULL) || (root->left==NULL && root->right==NULL)) return;
+            ANS.push_back(root->val);
+            if(root->left)
+            pre(root->left,ANS);
+            else if(root->right)
+            pre(root->right,ANS);
+        }
+        void inOrder(TreeNode* root, vector<int>& ANS){
+            if(root==NULL) return;
+            inOrder(root->left,ANS);
+            if(root->left==NULL && root->right==NULL)
+            ANS.push_back(root->val);
+            inOrder(root->right,ANS);
+
+        }
+        void post(TreeNode* root, vector<int>& ANS){
+            if((root==NULL) || (root->left==NULL && root->right==NULL)) return;
+            if(root->right)
+            post(root->right,ANS);
+            else if(root->left)
+            post(root->left,ANS);
+            ANS.push_back(root->val);
+        }
+
+    vector<int> boundaryOfBinaryTree(TreeNode *root) {
+        vector<int> ANS;
+        if(root==NULL) return ANS;
+        ANS.push_back(root->val);
+        pre(root->left, ANS);
+        inOrder(root, ANS);
+        post(root->right, ANS);
+        return ANS;
+    }
+};
