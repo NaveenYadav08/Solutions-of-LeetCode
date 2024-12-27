@@ -41,3 +41,11 @@ https://leetcode.com/problems/flatten-binary-tree-to-linked-list/
         TreeNode* prev = NULL;
         rec(root, prev);
     }
+
+
+
+
+🌲 POSTORDER 
+
+// JUST SWAP Left <----> Right //
+// Reverse Final Link List //
