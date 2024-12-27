@@ -1,0 +1,4 @@
+⭐ N ary Tree INORDER 
+// no specific 
+( go to all child of curr except last )  print curr ( go to last child )
+
